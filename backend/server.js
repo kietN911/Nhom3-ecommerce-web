@@ -3,21 +3,21 @@ const cors = require("cors");
 
 const app = express();
 app.use(cors());
-app.use(express.json());
 
 const users = [
-  { id: 1, name: "Kiệt" },
-  { id: 2, name: "User2" }
+  { id: 1, name: "Kiệt", email: "kiet@gmail.com" },
+  { id: 2, name: "User2", email: "user2@gmail.com" }
 ];
 
-// Lấy tất cả users
+// lấy tất cả users
 app.get("/users", (req, res) => {
   res.json(users);
 });
 
-// Lấy user theo id
+// lấy user theo id
 app.get("/users/:id", (req, res) => {
   const id = parseInt(req.params.id);
+
   const user = users.find(u => u.id === id);
 
   if (!user) {
@@ -30,5 +30,5 @@ app.get("/users/:id", (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
+  console.log("Server running");
 });
