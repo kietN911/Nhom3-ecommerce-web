@@ -3,18 +3,26 @@ const cors = require("cors");
 
 const app = express();
 app.use(cors());
-app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Backend đang chạy!");
-});
+const users = [
+  { id: 1, name: "Kiệt" },
+  { id: 2, name: "User2" }
+];
 
+// API lấy tất cả users
 app.get("/users", (req, res) => {
-  res.json([
-    { id: 1, name: "Kiệt", email: "kiet@gmail.com" }
-  ]);
+  res.json(users);
 });
 
-app.listen(5000, () => {
-  console.log("Server chạy ở port 5000");
+// API lấy user theo id
+app.get("/users/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const user = users.find(u => u.id === id);
+  res.json(user);
+});
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log("Server running");
 });
