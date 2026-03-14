@@ -5,8 +5,12 @@ const app = express();
 app.use(cors());
 
 const users = [
-  { id: 1, name: "Kiệt", email: "kiet@gmail.com" },
-  { id: 2, name: "User2", email: "user2@gmail.com" }
+  { id: 1, name: "Nguyễn Hoài Anh Kiệt" },
+  { id: 2, name: "Võ Thành Lộc"},
+  { id: 3, name: "Nguyễn Lê Huy"},
+  { id: 4, name: "Lê Nguyễn Chí Bảo"},
+  { id: 5, name: "Chung Thành Đạt"},
+  { id: 6, name: "Tạ Minh Hậu"}
 ];
 
 // lấy tất cả users
