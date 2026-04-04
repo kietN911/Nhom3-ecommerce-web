@@ -1,8 +1,13 @@
 const express = require("express");
 const cors = require("cors");
+const productRoutes = require("./src/routes/productRoutes");
 
 const app = express();
 app.use(cors());
+app.use(express.json());
+
+// Kết nối API
+app.use("/api/products", productRoutes);
 
 const users = [
   { id: 1, name: "Nguyễn Hoài Anh Kiệt" },
