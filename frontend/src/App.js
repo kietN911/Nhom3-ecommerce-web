@@ -1,64 +1,38 @@
-import "./App.css";
-import { useEffect, useState } from "react";
+// src/App.js
+import React from 'react';
+import Header from './Header';
+import Home from './Home';
+import Footer from './Footer';
+import ProductPage from './ProductPage';
+import KeyboardPage from './KeyboardPage';
+import MousepadPage from './MousepadPage';
+import ChairPage from './ChairPage';
 
 function App() {
+  const path = window.location.pathname;
 
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    fetch("https://nhom3-backend.onrender.com/users")
-      .then(res => res.json())
-      .then(data => setUsers(data));
-  }, []);
+  const renderContent = () => {
+    switch (path) {
+      case '/products':
+        return <ProductPage />;
+      case '/keyboards':
+        return <KeyboardPage />;
+      case '/mousepads':
+        return <MousepadPage />;
+      case '/chairs':
+        return <ChairPage />;
+      default:
+        return <Home />;
+    }
+  };
 
   return (
-    <div style={styles.container}>
-
-      <h1 style={styles.title}>Danh sách Users</h1>
-
-      <table style={styles.table}>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Họ và Tên</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {users.map(user => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-            </tr>
-          ))}
-        </tbody>
-
-      </table>
-
+    <div className="d-flex flex-column min-vh-100">
+      <Header />
+      {renderContent()}
+      <Footer />
     </div>
   );
 }
-
-const styles = {
-
-  container: {
-    padding: "40px",
-    background: "#f5f6f7",
-    minHeight: "100vh",
-    fontFamily: "Arial"
-  },
-
-  title: {
-    marginBottom: "20px"
-  },
-
-  table: {
-    width: "100%",
-    borderCollapse: "collapse",
-    background: "white",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.1)"
-  },
-
-};
 
 export default App;
