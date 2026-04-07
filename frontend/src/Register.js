@@ -11,7 +11,7 @@ function Register() {
 
   const handleRegister = async () => {
     try {
-      await axios.post("http://localhost:5000/api/auth/register", {
+      await axios.post("https://nhom3-backend.onrender.com/api/auth/register", {
         username,
         email,
         password
