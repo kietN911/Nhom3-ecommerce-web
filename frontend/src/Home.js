@@ -17,7 +17,7 @@ const Home = () => {
   if (cache) {
     setProducts(JSON.parse(cache));
   } else {
-    axios.get("http://localhost:5000/api/products")
+    axios.get("https://nhom3-backend.onrender.com/api/products")
       .then((res) => {
         setProducts(res.data);
         localStorage.setItem("products", JSON.stringify(res.data));
