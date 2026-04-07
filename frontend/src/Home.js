@@ -12,18 +12,17 @@ const Home = () => {
 
   // Gọi API
   useEffect(() => {
-  const cache = localStorage.getItem("products");
-
-  if (cache) {
-    setProducts(JSON.parse(cache));
-  } else {
-    axios.get("https://nhom3-backend.onrender.com/api/products")
-      .then((res) => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(process.env.REACT_APP_API);
         setProducts(res.data);
-        localStorage.setItem("products", JSON.stringify(res.data));
-      });
-  }
-}, []);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <main className="flex-grow-1">

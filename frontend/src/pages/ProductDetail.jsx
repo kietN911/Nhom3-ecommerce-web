@@ -7,22 +7,52 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  const cache = localStorage.getItem("products");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // ⚠️ chỉ chạy ở browser
+        if (typeof window !== "undefined") {
+          const cache = localStorage.getItem("products");
 
-  if (cache) {
-    const data = JSON.parse(cache);
+          if (cache) {
+            const data = JSON.parse(cache);
 
-    const found = data.find(
-      (item) =>
-        String(item.id) === String(id) ||
-        String(item._id) === String(id)
-    );
+            const found = data.find(
+              (item) =>
+                String(item.id) === String(id) ||
+                String(item._id) === String(id)
+            );
 
-    setProduct(found);
-    setLoading(false);
-  }
-}, [id]);
+            if (found) {
+              setProduct(found);
+              setLoading(false);
+              return;
+            }
+          }
+        }
+
+        // 👉 fallback gọi API
+        const res = await axios.get(
+          process.env.REACT_APP_API
+        );
+
+        const found = res.data.find(
+          (item) =>
+            String(item.id) === String(id) ||
+            String(item._id) === String(id)
+        );
+
+        setProduct(found);
+        setLoading(false);
+
+      } catch (err) {
+        console.log(err);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   if (loading) return <h3 className="text-center mt-5">Đang tải...</h3>;
 
@@ -32,7 +62,6 @@ useEffect(() => {
     <div className="container my-5">
       <div className="row">
 
-        {/* Ảnh */}
         <div className="col-md-6">
           <img
             src={product.image}
@@ -42,7 +71,6 @@ useEffect(() => {
           />
         </div>
 
-        {/* Thông tin */}
         <div className="col-md-6">
           <h2 className="fw-bold">{product.name}</h2>
 
@@ -52,17 +80,9 @@ useEffect(() => {
 
           <p>{product.description}</p>
 
-          <p>
-            <strong>Danh mục:</strong> {product.category}
-          </p>
-
-          <p>
-            <strong>Còn lại:</strong> {product.countInStock}
-          </p>
-
-          <p>
-            <strong>Đánh giá:</strong> ⭐ {product.rating} ({product.numReviews} reviews)
-          </p>
+          <p><strong>Danh mục:</strong> {product.category}</p>
+          <p><strong>Còn lại:</strong> {product.countInStock}</p>
+          <p><strong>Đánh giá:</strong> ⭐ {product.rating}</p>
 
           <button className="btn btn-dark mt-3 px-4">
             🛒 Thêm vào giỏ hàng
