@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
-// Import ảnh
-import mouseIcon from './imageTab/icon-chuot-gaming-2.png';
-import keyboardIcon from './imageTab/icon-ban-phim-gaming-2.png';
-import mousepadIcon from './imageTab/icon-lot-chuot-2.png';
-import chairIcon from './imageTab/icon-ghe-cong-thai-hoc-2.png';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -85,7 +80,7 @@ const Home = () => {
               <div className="card h-100 shadow-sm">
 
                 <img
-                  src={item.image}
+                  src={item.image} alt={item.name}
                   className="card-img-top"
                   style={{ height: "200px", objectFit: "cover" }}
                 />
