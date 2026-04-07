@@ -1,12 +1,30 @@
-// src/Home.js
-import React from 'react';
-// Import ảnh từ folder imageTab (thay đổi tên file cho đúng với file của bạn)
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Link } from "react-router-dom";
+// Import ảnh
 import mouseIcon from './imageTab/icon-chuot-gaming-2.png';
 import keyboardIcon from './imageTab/icon-ban-phim-gaming-2.png';
 import mousepadIcon from './imageTab/icon-lot-chuot-2.png';
 import chairIcon from './imageTab/icon-ghe-cong-thai-hoc-2.png';
 
 const Home = () => {
+  const [products, setProducts] = useState([]);
+
+  // Gọi API
+  useEffect(() => {
+  const cache = localStorage.getItem("products");
+
+  if (cache) {
+    setProducts(JSON.parse(cache));
+  } else {
+    axios.get("http://localhost:5000/api/products")
+      .then((res) => {
+        setProducts(res.data);
+        localStorage.setItem("products", JSON.stringify(res.data));
+      });
+  }
+}, []);
+
   return (
     <main className="flex-grow-1">
       {/* Hero Banner Carousel Section */}
@@ -53,51 +71,38 @@ const Home = () => {
         </button>
       </section>
 
-      {/* Categories Section */}
-      <section className="container my-5">
-        <div className="d-flex flex-wrap justify-content-center gap-4 text-center">
-          <a href="/products" className="text-decoration-none text-dark p-3" style={{width: '160px'}}>
-            <img src={mouseIcon} alt="Chuột gaming" className="mb-3 border rounded-3 p-2 shadow-sm" style={{height: '80px', width: '80px', objectFit: 'contain'}} />
-            <h6 className="fw-bold">Chuột gaming</h6>
-          </a>
-          <a href="/keyboards" className="text-decoration-none text-dark p-3" style={{width: '160px'}}>
-            <img src={keyboardIcon} alt="Bàn phím cơ & HE" className="mb-3 border rounded-3 p-2 shadow-sm" style={{height: '80px', width: '80px', objectFit: 'contain'}} />
-            <h6 className="fw-bold">Bàn phím cơ &<br/>HE</h6>
-          </a>
-          <a href="/mousepads" className="text-decoration-none text-dark p-3" style={{width: '160px'}}>
-            <img src={mousepadIcon} alt="Lót chuột" className="mb-3 border rounded-3 p-2 shadow-sm" style={{height: '80px', width: '80px', objectFit: 'contain'}} />
-            <h6 className="fw-bold">Lót chuột</h6>
-          </a>
-          <a href="/chairs" className="text-decoration-none text-dark p-3" style={{width: '160px'}}>
-            <img src={chairIcon} alt="Ghế công thái học" className="mb-3 border rounded-3 p-2 shadow-sm" style={{height: '80px', width: '80px', objectFit: 'contain'}} />
-            <h6 className="fw-bold">Ghế công thái<br/>học</h6>
-          </a>
-        </div>
-      </section>
-
-      {/* Gear Mới Nóng Hổi */}
+      {/* Danh sách sản phẩm */}
       <section className="container my-5">
         <div className="d-flex justify-content-between align-items-end mb-4 border-bottom pb-2">
           <div>
-            <h2 className="fw-bold mb-1">Gear mới nóng hổi</h2>
-            <p className="text-muted mb-0">Tụi mình luôn cầm thử trước khi gear đến tay bạn. Mới về, đã test, sẵn sàng chiến.</p>
+            <h2 className="fw-bold mb-1">Sản phẩm nổi bật</h2>
+            <p className="text-muted mb-0">Danh sách sản phẩm mới nhất từ cửa hàng</p>
           </div>
-          <a href="/products" className="text-decoration-none text-dark fw-semibold">Xem hàng mới về &gt;</a>
         </div>
-        <div className="row" id="new-gear-container">
-        </div>
-      </section>
 
-      {/* Top Bán Chạy */}
-      <section className="container my-5">
-        <div className="d-flex justify-content-between align-items-end mb-4 border-bottom pb-2">
-          <div>
-            <h2 className="fw-bold mb-1">Top bán chạy - con số không biết nói dối</h2>
-            <p className="text-muted mb-0">Hàng nghìn game thủ đã chốt đơn. Bạn thì sao?</p>
-          </div>
-          <a href="/products" className="text-decoration-none text-dark fw-semibold">Xem top bán chạy &gt;</a>
-        </div>
-        <div className="row" id="top-selling-container">
+        <div className="row">
+          {products.map((item) => (
+            <div className="col-md-3 mb-4" key={item.id}>
+              <div className="card h-100 shadow-sm">
+
+                <img
+                  src={item.image}
+                  className="card-img-top"
+                  style={{ height: "200px", objectFit: "cover" }}
+                />
+
+                <div className="card-body text-center">
+                  <h6 className="fw-bold">{item.name}</h6>
+                  <p className="text-danger fw-bold">{item.price}₫</p>
+
+                  <Link to={`/product/${item._id || item.id}`} className="btn btn-dark btn-sm">
+                    Xem chi tiết
+                  </Link>
+                </div>
+
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
