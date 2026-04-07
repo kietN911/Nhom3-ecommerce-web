@@ -4,20 +4,34 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Gọi API
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(process.env.REACT_APP_API);
-        setProducts(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  const cache = localStorage.getItem("products");
 
-    fetchData();
-  }, []);
+  // ✅ Nếu có cache → dùng luôn, không gọi API
+  if (cache) {
+    setProducts(JSON.parse(cache));
+    setLoading(false);
+    return; // 🔥 QUAN TRỌNG
+  }
+
+  // ❌ Chỉ gọi API khi không có cache
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(process.env.REACT_APP_API);
+      setProducts(res.data);
+      localStorage.setItem("products", JSON.stringify(res.data));
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchData();
+}, []);
 
   return (
     <main className="flex-grow-1">
@@ -74,30 +88,39 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="row">
-          {products.map((item) => (
-            <div className="col-md-3 mb-4" key={item.id}>
-              <div className="card h-100 shadow-sm">
+        {loading ? (
+          <h3 className="text-center">Đang tải sản phẩm...</h3>
+        ) : (
+          <div className="row">
+            {products.map((item) => (
+              <div className="col-md-3 mb-4" key={item.id}>
+                <div className="card h-100 shadow-sm">
 
-                <img
-                  src={item.image} alt={item.name}
-                  className="card-img-top"
-                  style={{ height: "200px", objectFit: "cover" }}
-                />
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    loading="lazy"
+                    className="card-img-top"
+                    style={{ height: "200px", objectFit: "cover" }}
+                  />
 
-                <div className="card-body text-center">
-                  <h6 className="fw-bold">{item.name}</h6>
-                  <p className="text-danger fw-bold">{item.price}₫</p>
+                  <div className="card-body text-center">
+                    <h6 className="fw-bold">{item.name}</h6>
+                    <p className="text-danger fw-bold">{item.price}₫</p>
 
-                  <Link to={`/product/${item._id || item.id}`} className="btn btn-dark btn-sm">
-                    Xem chi tiết
-                  </Link>
+                    <Link
+                      to={`/product/${item._id || item.id}`}
+                      className="btn btn-dark btn-sm"
+                    >
+                      Xem chi tiết
+                    </Link>
+                  </div>
+
                 </div>
-
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* 4 Lý do Section */}
