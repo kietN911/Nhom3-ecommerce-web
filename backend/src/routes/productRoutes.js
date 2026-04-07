@@ -1,11 +1,17 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { getProducts, getProductById } = require('../controllers/productController');
+const {
+  getProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+  deleteProduct
+} = require("../controllers/productController");
 
-// Đường dẫn lấy tất cả sản phẩm: GET /api/products
-router.get('/', getProducts);
-
-// Đường dẫn lấy chi tiết 1 sản phẩm: GET /api/products/:id
-router.get('/:id', getProductById);
+router.get("/", getProducts);
+router.get("/:id", getProductById);
+router.post("/", createProduct); // 👈 QUAN TRỌNG
+router.put("/:id", updateProduct);
+router.delete("/:id", deleteProduct);
 
 module.exports = router;

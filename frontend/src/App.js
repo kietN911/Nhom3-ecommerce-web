@@ -7,6 +7,8 @@ import KeyboardPage from "./KeyboardPage";
 import MousepadPage from "./MousepadPage";
 import ChairPage from "./ChairPage";
 import ProductDetail from "./pages/ProductDetail";
+import Login from "./Login";
+import Register from "./Register";
 
 function App() {
   return (
@@ -20,6 +22,9 @@ function App() {
           <Route path="/keyboards" element={<KeyboardPage />} />
           <Route path="/mousepads" element={<MousepadPage />} />
           <Route path="/chairs" element={<ChairPage />} />
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
           {/* 🔥 Trang chi tiết */}
           <Route path="/product/:id" element={<ProductDetail />} />

@@ -8,21 +8,10 @@ const Home = () => {
 
   // Gọi API
   useEffect(() => {
-  const cache = localStorage.getItem("products");
-
-  // ✅ Nếu có cache → dùng luôn, không gọi API
-  if (cache) {
-    setProducts(JSON.parse(cache));
-    setLoading(false);
-    return; // 🔥 QUAN TRỌNG
-  }
-
-  // ❌ Chỉ gọi API khi không có cache
   const fetchData = async () => {
     try {
       const res = await axios.get(process.env.REACT_APP_API);
       setProducts(res.data);
-      localStorage.setItem("products", JSON.stringify(res.data));
     } catch (err) {
       console.log(err);
     } finally {
@@ -93,7 +82,7 @@ const Home = () => {
         ) : (
           <div className="row">
             {products.map((item) => (
-              <div className="col-md-3 mb-4" key={item.id}>
+              <div className="col-md-3 mb-4" key={item._id}>
                 <div className="card h-100 shadow-sm">
 
                   <img
@@ -109,7 +98,7 @@ const Home = () => {
                     <p className="text-danger fw-bold">{item.price}₫</p>
 
                     <Link
-                      to={`/product/${item._id || item.id}`}
+                      to={`/product/${item._id}`}
                       className="btn btn-dark btn-sm"
                     >
                       Xem chi tiết

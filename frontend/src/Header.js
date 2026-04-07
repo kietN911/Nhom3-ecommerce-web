@@ -1,5 +1,13 @@
 // src/Header.js
 import React from 'react';
+import { Link } from "react-router-dom";
+const user = JSON.parse(localStorage.getItem("user"));
+
+const logout = () => {
+  localStorage.removeItem("user");
+  localStorage.removeItem("token");
+  window.location.reload();
+};
 
 const Header = () => {
   return (
@@ -33,8 +41,22 @@ const Header = () => {
               <input className="form-control rounded-pill bg-dark text-white border-secondary" type="search" placeholder="Tìm chuột, bàn phím, tai nghe..." />
             </form>
             <div className="d-flex text-white align-items-center gap-3">
-              <span style={{cursor: 'pointer'}}>Đăng nhập</span>
-              <span style={{cursor: 'pointer'}}>Giỏ hàng (0)</span>
+              {user ? (
+                <>
+                  <span>Xin chào {user.username}</span>
+                  <span onClick={logout} style={{cursor: "pointer"}}>
+                    Đăng xuất
+                  </span>
+                </>
+              ) : (
+                <Link to="/login" className="text-white text-decoration-none">
+                  Đăng nhập
+                </Link>
+              )}
+
+              <span style={{cursor: 'pointer'}}>
+                Giỏ hàng (0)
+              </span>
             </div>
           </div>
         </div>
