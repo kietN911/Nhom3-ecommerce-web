@@ -26,8 +26,8 @@ const Header = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 fw-semibold ms-4">
-              <li className="nav-item"><a className="nav-link text-white" href="/">Gaming Gear</a></li>
-              <li className="nav-item"><a className="nav-link text-white" href="/">Office Gear</a></li>
+              <li className="nav-item"><a className="nav-link text-white" href="/">New & Featured</a></li>
+              <li className="nav-item"><a className="nav-link text-white" href="/">Sale</a></li>
             </ul>
             <form className="d-flex me-4" role="search">
               <input className="form-control rounded-pill bg-dark text-white border-secondary" type="search" placeholder="Tìm chuột, bàn phím, tai nghe..." />
