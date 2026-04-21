@@ -1,0 +1,244 @@
+:root {
+    --primary-color: #178629;
+    --secondary-color: #26734d;
+    --accent-color: #ffc107;
+    --text-dark: #212529;
+    --text-light: #f8f9fa;
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --transition: all 0.3s ease;
+}
+
+.btn-uniform {
+    min-width: 140px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* Thanh điều hướng hiệu ứng kính mờ */
+.navbar {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.navbar-brand.logo-text {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary-color) !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transition);
+}
+
+.navbar-brand.logo-text:hover {
+    transform: scale(1.05);
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--text-dark) !important;
+    margin: 0 10px;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+    height: 2px;
+    background: var(--primary-color);
+    transform: scaleX(0);
+    transition: var(--transition);
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+/* Phần Banner chính */
+.hero-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-image {
+    transition: transform 0.5s ease;
+}
+
+.hero-image:hover {
+    transform: translateY(-10px) rotate(-2deg);
+}
+
+/* Thẻ sản phẩm */
+.product-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: var(--transition);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.product-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 250px;
+    background: #f1f1f1;
+}
+
+.product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-img {
+    transform: scale(1.1);
+}
+
+.btn-add-cart {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-add-cart:hover {
+    background: var(--secondary-color);
+    box-shadow: 0 5px 15px rgba(23, 134, 41, 0.4);
+    color: white;
+}
+
+/* Chân trang */
+footer {
+    background: #1a1a1a;
+    color: #888;
+    padding: 60px 0 20px;
+}
+
+footer h5 {
+    color: white;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+footer a {
+    color: #888;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+footer a:hover {
+    color: var(--primary-color);
+}
+
+.social-icons a {
+    font-size: 1.2rem;
+    margin-right: 15px;
+}
+
+.footer-bottom {
+    border-top: 1px solid #333;
+    padding-top: 20px;
+    margin-top: 40px;
+}
+
+/* Hiệu ứng chuyển động */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animated {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Tối ưu hóa cho thiết bị di động (Responsive) */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .hero-image-container {
+        margin-top: 30px;
+    }
+
+    .product-img-wrapper {
+        height: 180px;
+    }
+
+    .product-card .card-body {
+        padding: 15px !important;
+    }
+
+    .product-card h5 {
+        font-size: 0.9rem;
+    }
+
+    .btn-add-cart {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+    }
+
+    .navbar-brand img {
+        height: 40px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero-content .d-flex {
+        flex-direction: column;
+    }
+    
+    .hero-content .btn {
+        width: 100%;
+    }
+}
