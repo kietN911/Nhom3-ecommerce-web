@@ -48,6 +48,20 @@ class AuthController extends Controller
             ]);
         }
 
+        if (!$user) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Không tìm thấy user'
+            ]);
+        }
+
+        if (!Hash::check($request->password, $user->password)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Sai mật khẩu'
+            ]);
+        }
+
         return response()->json([
             'status' => 'success',
             'user' => $user
