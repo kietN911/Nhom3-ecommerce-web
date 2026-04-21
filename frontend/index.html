@@ -119,39 +119,64 @@
             </div>
 
             <div class="row g-4" id="featured-products"></div>
-                <script> const API_BASE_URL = "https://nhom3-backend.onrender.com/api"; 
-                    document.addEventListener("DOMContentLoaded", () => { loadProducts(); }); 
-                    async function loadProducts() { try { 
-                        const res = await fetch(`${API_BASE_URL}/products`); 
-                        const data = await res.json(); 
-                        const container = document.getElementById("products"); 
-                        container.innerHTML = ""; 
-                        data.forEach(product => { 
-                            const image = product.image ? `https://nhom3-backend.onrender.com/images/${product.image}` : "https://via.placeholder.com/300"; 
-                            const html = `
-                                <div class="col-6 col-md-4 col-lg-3">
-                                    <div class="product-card h-100">
-                            
-                                        <img src="${image}" 
-                                             class="w-100 product-img"
-                                             onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
-                            
-                                        <div class="p-3">
-                                            <div class="product-title mb-2">${product.name}</div>
-                            
-                                            <div class="price mb-2">
-                                                ${Number(product.price).toLocaleString()} VND
+                <script>
+                    const API_BASE_URL = "https://nhom3-backend.onrender.com/api";
+                    
+                    document.addEventListener("DOMContentLoaded", () => {
+                        loadProducts();
+                    });
+                    
+                    async function loadProducts() {
+                        try {
+                            const res = await fetch(`${API_BASE_URL}/products`);
+                            const data = await res.json();
+                    
+                            const container = document.getElementById("featured-products");
+                            container.innerHTML = "";
+                    
+                            data.forEach(product => {
+                                const image = product.image 
+                                    ? `https://nhom3-backend.onrender.com/images/${product.image}` 
+                                    : "https://via.placeholder.com/300";
+                    
+                                const html = `
+                                    <div class="col-6 col-md-4 col-lg-3">
+                                        <div class="product-card h-100">
+                                            
+                                            <img src="${image}" 
+                                                 class="w-100 product-img"
+                                                 onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+                    
+                                            <div class="p-3 d-flex flex-column">
+                                                <div class="product-title mb-2">${product.name}</div>
+                    
+                                                <div class="price mb-2">
+                                                    ${Number(product.price).toLocaleString()} VND
+                                                </div>
+                    
+                                                <div class="stock mb-3">
+                                                    Còn lại: ${product.stock}
+                                                </div>
+                    
+                                                <button class="btn-add mt-auto">
+                                                    Thêm vào giỏ
+                                                </button>
                                             </div>
-                            
-                                            <div class="stock">
-                                                Còn lại: ${product.stock}
-                                            </div>
+                    
                                         </div>
-                            
                                     </div>
-                                </div>
-                            `; 
-                            container.innerHTML += html; }); } catch (err) { console.error(err); document.getElementById("products").innerHTML = "<p class='text-danger'>Không load được sản phẩm</p>"; } } </script>
+                                `;
+                    
+                                container.innerHTML += html;
+                            });
+                    
+                        } catch (err) {
+                            console.error(err);
+                            document.getElementById("featured-products").innerHTML =
+                                "<p class='text-danger'>Không load được sản phẩm</p>";
+                        }
+                    }
+                </script>
             </div>
     </section>
 
