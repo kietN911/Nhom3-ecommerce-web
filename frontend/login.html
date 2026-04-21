@@ -1,0 +1,21 @@
+<script>
+fetch("https://your-backend.onrender.com/api/login", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        email: email.value,
+        password: password.value
+    })
+})
+.then(res => res.json())
+.then(data => {
+    if (data.status === "success") {
+        localStorage.setItem("user", JSON.stringify(data.user));
+        alert("Đăng nhập thành công");
+    } else {
+        alert(data.message);
+    }
+});
+</script>

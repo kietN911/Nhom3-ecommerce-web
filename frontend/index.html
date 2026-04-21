@@ -329,6 +329,18 @@
             // Nơi này bạn có thể gọi API add to cart sau
         }
 
+        function addToCart() {
+            const user = JSON.parse(localStorage.getItem("user"));
+
+            if (!user) {
+                alert("Bạn cần đăng nhập");
+                window.location.href = "login.html";
+                return;
+            }
+
+            alert("Đã thêm vào giỏ");
+        }
+
         /* --- 2. XỬ LÝ POPUP ĐĂNG NHẬP / ĐĂNG KÝ --- */
         function openLogin() {
             document.getElementById("loginModal").classList.remove("d-none");
