@@ -112,7 +112,7 @@
             <div class="d-flex justify-content-between align-items-end mb-5">
                 <div>
                     <h6 class="text-primary text-uppercase fw-bold">Gợi ý cho bạn</h6>
-                    <h2 class="fw-bold">SẢN PHẨM YÊU THÍCH</h2>
+                    <h2 class="fw-bold">SẢN PHẨM</h2>
                 </div>
                 <a href="#" class="btn btn-link text-decoration-none fw-bold">Xem tất cả <i
                         class="fas fa-arrow-right ms-1"></i></a>
@@ -121,7 +121,7 @@
             <div class="row g-4" id="featured-products"></div>
                 <script>
                     document.addEventListener("DOMContentLoaded", function () {
-                      fetch("https://nhom3-backend.onrender.com/api/products")
+                      const API_BASE_URL = 'https://nhom3-backend.onrender.com/api';
                         .then(res => res.json())
                         .then(data => {
                           const container = document.getElementById("featured-products");
