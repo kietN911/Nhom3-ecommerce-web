@@ -11,4 +11,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN composer install
 
+RUN php artisan config:clear
+RUN php artisan cache:clear
+RUN php artisan config:cache
+RUN php artisan migrate --force
+
 CMD php artisan serve --host=0.0.0.0 --port=$PORT
