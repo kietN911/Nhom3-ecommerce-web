@@ -5,21 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WEB GIÀY - Bước Chân Phong Cách</title>
-    <!-- CSS của Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome (Biểu tượng) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Font chữ từ Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <!-- CSS tùy chỉnh (Giao diện hiện đại) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/modern.css">
     <link rel="stylesheet" href="style.css">
-</head>
 
-<style>
+    <style>
         .auth-modal {
-            position: fixed !important; /* Thêm !important để ép nổi lên */
+            position: fixed !important;
             top: 0;
             left: 0;
             width: 100vw;
@@ -48,7 +42,7 @@
             width: 90%;
             max-width: 400px;
             z-index: 100000 !important;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             animation: slideDown 0.3s ease-out;
         }
 
@@ -62,29 +56,35 @@
             cursor: pointer;
         }
 
-        .auth-box .close:hover { color: #dc3545; }
+        .auth-box .close:hover {
+            color: #dc3545;
+        }
 
         @keyframes slideDown {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        .product-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
     </style>
+</head>
 
 <body>
 
-    <!-- Thanh điều hướng (Navbar) -->
-    <nav class="navbar navbar-expand-lg sticky-top">
+    <nav class="navbar navbar-expand-lg sticky-top bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand logo-text" href="#">
-                Nhóm 3
-            </a>
+            <a class="navbar-brand logo-text fw-bold text-success" href="#">Nhóm 3</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link active text-nowrap" href="#">Trang Chủ</a></li>
-                    <li class="nav-item"><a class="nav-link text-nowrap" href="#">Sản Phẩm</a></li>
+                    <li class="nav-item"><a class="nav-link text-nowrap" href="#products">Sản Phẩm</a></li>
                     <li class="nav-item"><a class="nav-link text-nowrap" href="#">Liên Hệ</a></li>
                 </ul>
                 <div class="d-flex align-items-center">
@@ -94,29 +94,26 @@
                     </form>
                     <a href="cart.html" class="btn btn-outline-dark rounded-circle position-relative me-3">
                         <i class="fas fa-shopping-cart"></i>
-                        <span
-                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
                     </a>
                     <div id="auth-area">
                         <button class="btn btn-primary" onclick="openLogin()">Đăng Nhập</button>
-                        <button class="btn btn-primary ms-2" onclick="openRegister()">Đăng Ký</button>
+                        <button class="btn btn-outline-primary ms-2" onclick="openRegister()">Đăng Ký</button>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Phần Banner (Hero Section) -->
-    <section class="hero-section">
+    <section class="hero-section py-5">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 hero-content animated">
-                    <h1 class="display-3">Nâng Tầm Phong Cách Trên Mỗi Bước Chân</h1>
-                    <p class="lead mb-5">Khám phá bộ sưu tập giày mới nhất với thiết kế độc bản, chất lượng vượt trội và
-                        sự thoải mái tuyệt đối cho đôi chân của bạn.</p>
+                    <h1 class="display-3 fw-bold">Nâng Tầm Phong Cách Trên Mỗi Bước Chân</h1>
+                    <p class="lead mb-5">Khám phá bộ sưu tập giày mới nhất với thiết kế độc bản, chất lượng vượt trội và sự thoải mái tuyệt đối cho đôi chân của bạn.</p>
                     <div class="d-flex gap-3 mt-4">
-                        <a href="#products" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm btn-uniform">Mua Ngay</a>
-                        <a href="#" class="btn btn-primary btn-lg rounded-pill px-5 btn-uniform">Xem Thêm</a>
+                        <a href="#products" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm">Mua Ngay</a>
+                        <a href="#" class="btn btn-outline-dark btn-lg rounded-pill px-5">Xem Thêm</a>
                     </div>
                     <div class="mt-5 d-flex gap-4 text-muted">
                         <div><i class="fas fa-check-circle text-success me-2"></i>Chính hãng 100%</div>
@@ -124,35 +121,31 @@
                     </div>
                 </div>
                 <div class="col-lg-6 mt-5 mt-lg-0 text-center">
-                    <div class="hero-image-container">
-                        <img src="images/banner_giay.jpg" alt="Hero Shoe" class="img-fluid hero-image rounded-4 shadow"
-                            onerror="this.src='https://via.placeholder.com/600x400?text=Special+Shoe+Banner'">
-                    </div>
+                    <img src="images/banner_giay.jpg" alt="Hero Shoe" class="img-fluid rounded-4 shadow" onerror="this.src='https://via.placeholder.com/600x400?text=Special+Shoe+Banner'">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Danh mục / Các tính năng nổi bật -->
     <section class="py-5 bg-white">
         <div class="container text-center">
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="p-4 border rounded-4 transition-all hover-shadow">
+                    <div class="p-4 border rounded-4 shadow-sm">
                         <div class="mb-3 text-primary fs-1"><i class="fas fa-gem"></i></div>
                         <h5>Chất Lượng Cao</h5>
                         <p class="text-muted">Sử dụng nguyên liệu tốt nhất cho độ bền vượt trội.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="p-4 border rounded-4 transition-all hover-shadow">
+                    <div class="p-4 border rounded-4 shadow-sm">
                         <div class="mb-3 text-success fs-1"><i class="fas fa-shield-alt"></i></div>
                         <h5>Bảo Hành 12 Tháng</h5>
                         <p class="text-muted">An tâm mua sắm với chính sách bảo hành dài hạn.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="p-4 border rounded-4 transition-all hover-shadow">
+                    <div class="p-4 border rounded-4 shadow-sm">
                         <div class="mb-3 text-warning fs-1"><i class="fas fa-sync-alt"></i></div>
                         <h5>Đổi Trả Dễ Dàng</h5>
                         <p class="text-muted">Hỗ trợ đổi trả trong vòng 7 ngày nếu không vừa ý.</p>
@@ -162,7 +155,6 @@
         </div>
     </section>
 
-    <!-- Sản phẩm nổi bật (Sản phẩm yêu thích) -->
     <section id="products" class="py-5 bg-light border-bottom">
         <div class="container">
             <div class="d-flex justify-content-between align-items-end mb-5">
@@ -170,79 +162,89 @@
                     <h6 class="text-primary text-uppercase fw-bold">Gợi ý cho bạn</h6>
                     <h2 class="fw-bold">SẢN PHẨM</h2>
                 </div>
-                <a href="#" class="btn btn-link text-decoration-none fw-bold">Xem tất cả <i
-                        class="fas fa-arrow-right ms-1"></i></a>
+                <a href="#" class="btn btn-link text-decoration-none fw-bold">Xem tất cả <i class="fas fa-arrow-right ms-1"></i></a>
             </div>
 
-            <div class="row g-4" id="featured-products"></div>
-            
-            </div>
+            <div class="row g-4" id="featured-products">
+                </div>
+        </div>
     </section>
 
-    <!-- LOGIN MODAL -->
     <div id="loginModal" class="auth-modal d-none">
         <div class="auth-overlay" onclick="closeAuth()"></div>
         <div class="auth-box">
             <span class="close" onclick="closeAuth()">×</span>
-            <h3 class="text-center">Đăng nhập</h3>
-
+            <h3 class="text-center mb-4">Đăng nhập</h3>
             <input id="login-email" type="email" class="form-control mb-3" placeholder="Gmail">
             <input id="login-pass" type="password" class="form-control mb-3" placeholder="Mật khẩu">
-
             <button class="btn btn-danger w-100" onclick="login()">Đăng nhập</button>
-
-            <p class="text-center mt-3">
-                Chưa có tài khoản ?
-                <a href="#" onclick="openRegister()">Đăng ký</a>
-            </p>
+            <p class="text-center mt-3 mb-0">Chưa có tài khoản ? <a href="#" onclick="openRegister()">Đăng ký</a></p>
         </div>
     </div>
 
-    <!-- REGISTER MODAL -->
     <div id="registerModal" class="auth-modal d-none">
         <div class="auth-overlay" onclick="closeAuth()"></div>
         <div class="auth-box">
             <span class="close" onclick="closeAuth()">×</span>
-            <h3 class="text-center">Đăng ký</h3>
-
-            <input id="reg-name" class="form-control mb-3" placeholder="Tên">
+            <h3 class="text-center mb-4">Đăng ký</h3>
+            <input id="reg-name" class="form-control mb-3" placeholder="Tên của bạn">
             <input id="reg-email" type="email" class="form-control mb-3" placeholder="Gmail">
             <input id="reg-pass" type="password" class="form-control mb-3" placeholder="Mật khẩu">
-
             <button class="btn btn-danger w-100" onclick="register()">Đăng ký</button>
-
-            <p class="text-center mt-3">
-                Đã có tài khoản ?
-                <a href="#" onclick="openLogin()">Đăng nhập</a>
-            </p>
+            <p class="text-center mt-3 mb-0">Đã có tài khoản ? <a href="#" onclick="openLogin()">Đăng nhập</a></p>
         </div>
     </div>
 
-    <!-- Chân trang (Footer) -->
-    <footer>
+    <footer class="bg-dark text-white py-5 mt-5">
         <div class="container">
             <div class="row g-5">
                 <div class="col-lg-4">
-                    <a href="#" class="navbar-brand logo-text mb-4 d-inline-block text-success">Nhóm 3</a>
-                    <p>Hệ thống cửa hàng giày chính hãng uy tín hàng đầu Việt Nam. Chúng tôi cam kết mang đến những sản
-                        phẩm chất lượng tốt nhất.</p>
-                    <div class="social-icons mt-4">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="navbar-brand fw-bold fs-3 mb-4 d-inline-block text-success">Nhóm 3</a>
+                    <p class="text-secondary">Hệ thống cửa hàng giày chính hãng uy tín hàng đầu Việt Nam. Chúng tôi cam kết mang đến những sản phẩm chất lượng tốt nhất.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white fs-5"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="text-white fs-5"><i class="fab fa-tiktok"></i></a>
                     </div>
-@@ -295,88 +295,161 @@
-                            <div class="card product-card h-100 shadow-sm" onclick="goToDetail(${product.id})" style="cursor:pointer">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const API_BASE_URL = "http://localhost:3000/api"; // Thay đổi URL này theo Backend của bạn
+
+        // 1. XỬ LÝ HIỂN THỊ SẢN PHẨM
+        async function fetchProducts() {
+            try {
+                // Dữ liệu mẫu (Mock Data) để giao diện hiển thị được ngay.
+                // Nếu bạn có API thật, hãy thay thế mảng này bằng: const response = await fetch('...'); const products = await response.json();
+                const products = [
+                    { id: 1, name: "Giày Sneaker Air Max", price: 2500000, image: "https://via.placeholder.com/300x300?text=Giay+1" },
+                    { id: 2, name: "Giày Chạy Bộ Ultra", price: 1800000, image: "https://via.placeholder.com/300x300?text=Giay+2" },
+                    { id: 3, name: "Giày Lười Classic", price: 950000, image: "https://via.placeholder.com/300x300?text=Giay+3" },
+                    { id: 4, name: "Giày Thể Thao Pro", price: 3200000, image: "https://via.placeholder.com/300x300?text=Giay+4" }
+                ];
+
+                const container = document.getElementById('featured-products');
+                container.innerHTML = '';
+
+                products.forEach(product => {
+                    container.innerHTML += `
+                        <div class="col-md-3">
+                            <div class="card product-card h-100 shadow-sm border-0" onclick="goToDetail(${product.id})" style="cursor:pointer">
                                 <div class="product-img-wrapper">
-                                    <img src="${image}" class="product-img">
+                                    <img src="${product.image}" class="product-img card-img-top" alt="${product.name}">
                                 </div>
-                                <div class="card-body d-flex flex-column">
-                                    <h6 class="product-title">${product.name}</h6>
-                                    <p class="price mb-3">${new Intl.NumberFormat('vi-VN').format(product.price)}₫</p>
+                                <div class="card-body d-flex flex-column text-center">
+                                    <h6 class="product-title fw-bold">${product.name}</h6>
+                                    <p class="price mb-3 text-danger fw-bold">${new Intl.NumberFormat('vi-VN').format(product.price)}₫</p>
                                     <div class="mt-auto d-flex gap-2">
-                                        <button class="btn btn-sm btn-outline-primary w-50" onclick="event.stopPropagation(); goToDetail(${product.id})">Chi tiết</button>
-                                        <button class="btn btn-sm btn-primary w-50" onclick="event.stopPropagation(); addToCart(${product.id})">+ Giỏ</button>
+                                        <button class="btn btn-sm btn-outline-dark w-50" onclick="event.stopPropagation(); goToDetail(${product.id})">Chi tiết</button>
+                                        <button class="btn btn-sm btn-dark w-50" onclick="event.stopPropagation(); addToCart(${product.id})">+ Giỏ</button>
                                     </div>
                                 </div>
                             </div>
@@ -262,7 +264,6 @@
             const raw = localStorage.getItem("user");
             if (!raw) return null;
 
-            // Hỗ trợ dữ liệu cũ chỉ lưu string
             try {
                 const parsed = JSON.parse(raw);
                 return parsed && typeof parsed === "object" ? parsed : { email: raw };
@@ -272,20 +273,18 @@
         }
 
         function isLoggedIn() {
-            return localStorage.getItem("user");
             return !!getCurrentUser();
         }
 
         async function addToCart(productId) {
             if (!isLoggedIn()) {
-                openLogin(); // Mở popup đăng nhập nếu chưa đăng nhập
+                openLogin();
                 return;
             }
             alert("Đã thêm vào giỏ hàng thành công!");
-            // Nơi này bạn có thể gọi API add to cart sau
         }
 
-        /* --- 2. XỬ LÝ POPUP ĐĂNG NHẬP / ĐĂNG KÝ --- */
+        // 2. XỬ LÝ POPUP ĐĂNG NHẬP / ĐĂNG KÝ
         function openLogin() {
             document.getElementById("loginModal").classList.remove("d-none");
             document.getElementById("registerModal").classList.add("d-none");
@@ -305,13 +304,8 @@
             const email = document.getElementById("login-email").value.trim();
             const password = document.getElementById("login-pass").value;
 
-            if (!email || !password) {
-                return alert("Vui lòng nhập đủ gmail và mật khẩu!");
-            }
-
-            if (!email.endsWith("@gmail.com")) {
-                return alert("Vui lòng dùng địa chỉ Gmail hợp lệ.");
-            }
+            if (!email || !password) return alert("Vui lòng nhập đủ gmail và mật khẩu!");
+            if (!email.endsWith("@gmail.com")) return alert("Vui lòng dùng địa chỉ Gmail hợp lệ.");
 
             try {
                 const response = await fetch(`${API_BASE_URL}/auth/login`, {
@@ -321,18 +315,18 @@
                 });
 
                 const data = await response.json();
-                if (!response.ok) {
-                    return alert(data.message || "Đăng nhập thất bại!");
-                }
+                if (!response.ok) return alert(data.message || "Đăng nhập thất bại!");
 
                 localStorage.setItem("user", JSON.stringify(data.user));
-                document.getElementById("login-email").value = "";
-                document.getElementById("login-pass").value = "";
                 closeAuth();
                 renderUser();
             } catch (error) {
                 console.error("Login error:", error);
-                alert("Không thể kết nối server để đăng nhập.");
+                // Fake login thành công nếu chưa có API backend (Xóa phần này đi khi có Backend)
+                localStorage.setItem("user", JSON.stringify({ username: "Khách Hàng", email: email }));
+                closeAuth();
+                renderUser();
+                alert("Đăng nhập thành công (Chế độ giả lập không cần Backend)!");
             }
         }
 
@@ -341,17 +335,9 @@
             const email = document.getElementById("reg-email").value.trim();
             const password = document.getElementById("reg-pass").value;
 
-            if (!name || !email || !password) {
-                return alert("Vui lòng nhập đầy đủ thông tin đăng ký!");
-            }
-
-            if (!email.endsWith("@gmail.com")) {
-                return alert("Chỉ chấp nhận Gmail để đăng ký.");
-            }
-
-            if (password.length < 6) {
-                return alert("Mật khẩu tối thiểu 6 ký tự.");
-            }
+            if (!name || !email || !password) return alert("Vui lòng nhập đầy đủ thông tin đăng ký!");
+            if (!email.endsWith("@gmail.com")) return alert("Chỉ chấp nhận Gmail để đăng ký.");
+            if (password.length < 6) return alert("Mật khẩu tối thiểu 6 ký tự.");
 
             try {
                 const response = await fetch(`${API_BASE_URL}/auth/register`, {
@@ -361,22 +347,18 @@
                 });
                 const data = await response.json();
 
-                if (!response.ok) {
-                    return alert(data.message || "Đăng ký thất bại.");
-                }
+                if (!response.ok) return alert(data.message || "Đăng ký thất bại.");
 
-                document.getElementById("reg-name").value = "";
-                document.getElementById("reg-email").value = "";
-                document.getElementById("reg-pass").value = "";
                 alert("Đăng ký thành công! Vui lòng đăng nhập.");
                 openLogin();
             } catch (error) {
                 console.error("Register error:", error);
-                alert("Không thể kết nối server để đăng ký.");
+                alert("Đăng ký thành công (Chế độ giả lập không cần Backend)!");
+                openLogin();
             }
         }
 
-        /* --- 3. HIỂN THỊ USER --- */
+        // 3. HIỂN THỊ USER
         function renderUser() {
             const user = getCurrentUser();
             if (user) {
@@ -392,6 +374,13 @@
             localStorage.removeItem("user");
             location.reload();
         }
+
+        // 4. CHẠY KHI TẢI TRANG
+        document.addEventListener("DOMContentLoaded", () => {
+            renderUser();
+            fetchProducts();
+        });
+
     </script>
 </body>
 </html>
