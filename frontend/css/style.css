@@ -585,3 +585,47 @@ footer a:hover{
     color: #ccc;
     text-decoration: underline;
 }
+
+body {
+    background: #f5f6fa;
+}
+
+/* Card đẹp */
+.product-card {
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: 0.3s;
+    background: #fff;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Ảnh */
+.product-img {
+    height: 220px;
+    object-fit: cover;
+    background: #f1f1f1;
+}
+
+/* Giá */
+.price {
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Title */
+.product-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Badge stock */
+.stock {
+    font-size: 14px;
+    color: #555;
+}
