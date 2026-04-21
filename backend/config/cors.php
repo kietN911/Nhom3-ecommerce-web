@@ -31,4 +31,8 @@ return [
 
     'supports_credentials' => false,
 
+    'paths' => ['api/*'],
+
+    'allowed_origins' => ['*'], // hoặc domain vercel của bạn
+
 ];
