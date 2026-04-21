@@ -131,102 +131,114 @@
     </div>
 
 <script>
-const API_BASE_URL = 'https://nhom3-backend.onrender.com/api';
-
-// Lấy ID trên thanh địa chỉ
-const params = new URLSearchParams(window.location.search);
-const productId = params.get("id");
-
-let currentProduct = null;
-
-document.addEventListener("DOMContentLoaded", () => {
-    // Nếu ai đó vào trang này mà không có ID, báo lỗi và ẩn khung
-    if (!productId) {
-        document.getElementById('main-content').innerHTML = `
-            <div class="text-center py-5">
-                <h3 class="text-danger mb-4">Không tìm thấy mã sản phẩm!</h3>
-                <a href="index.html" class="btn btn-primary">Về trang chủ</a>
-            </div>
-        `;
-        return;
-    }
-    loadProduct();
-});
-
-// LOAD CHI TIẾT
-async function loadProduct() {
-    try {
-        const res = await fetch(`${API_BASE_URL}/products/${productId}`);
-        const result = await res.json();
-        
-        // FIX LỖI: Cần trỏ đúng vào 'data' nếu API có bọc data
-        const product = result.data || result; 
-        currentProduct = product;
-
-        // Đổ dữ liệu chữ
-        document.getElementById("product-name").innerText = product.name || "Sản phẩm không có tên";
-        document.getElementById("product-price").innerText = new Intl.NumberFormat('vi-VN').format(product.price || 0) + "₫";
-        document.getElementById("product-description").innerText = product.description || "Sản phẩm này hiện chưa có mô tả chi tiết.";
-
-        // FIX LỖI ẢNH: Xử lý link y hệt như trang chủ
-        const imageUrl = product.image
-            ? (product.image.startsWith('http') ? product.image : `https://nhom3-backend.onrender.com/storage/${product.image}`)
-            : 'https://dummyimage.com/500x500/cccccc/000000&text=No+Image';
-
-        document.getElementById("product-image").src = imageUrl;
-
-    } catch (err) {
-        console.error(err);
-        document.getElementById('main-content').innerHTML = `
-            <div class="text-center py-5">
-                <h3 class="text-danger mb-4">Lỗi kết nối đến máy chủ! Không thể tải sản phẩm.</h3>
-                <a href="index.html" class="btn btn-primary">Về trang chủ</a>
-            </div>
-        `;
-    }
-}
-
-// Kiểm tra xem đã đăng nhập chưa (dùng chung localStorage với index)
-function isLoggedIn() {
-    return localStorage.getItem("user");
-}
-
-// THÊM GIỎ
-async function addToCart() {
-    if (!isLoggedIn()) {
-        alert("Bạn cần đăng nhập để thêm vào giỏ hàng! Hãy quay lại trang chủ để đăng nhập.");
-        window.location.href = "index.html"; // Chuyển về trang chủ để đăng nhập
-        return;
-    }
-
-    try {
-        await fetch(`${API_BASE_URL}/cart`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                product_id: currentProduct.id,
-                quantity: 1
-            })
-        });
-
-        alert("Đã thêm sản phẩm vào giỏ!");
-    } catch (err) {
-        console.error(err);
-        alert("Lỗi khi thêm vào giỏ hàng!");
-    }
-}
-
-// MUA NGAY
-function buyNow() {
-    if (!isLoggedIn()) {
-        alert("Bạn cần đăng nhập để mua hàng! Hãy quay lại trang chủ để đăng nhập.");
-        window.location.href = "index.html";
-        return;
+    const API_BASE_URL = 'https://nhom3-backend.onrender.com/api';
+    
+    // Lấy ID trên thanh địa chỉ (ví dụ: ?id=5)
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+    
+    let currentProduct = null;
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        if (!productId) {
+            document.getElementById('main-content').innerHTML = `
+                <div class="text-center py-5">
+                    <h3 class="text-danger mb-4">Không tìm thấy mã sản phẩm!</h3>
+                    <a href="index.html" class="btn btn-primary">Về trang chủ</a>
+                </div>
+            `;
+            return;
+        }
+        loadProduct();
+    });
+    
+    // HÀM LẤY VÀ HIỂN THỊ SẢN PHẨM THEO ID
+    async function loadProduct() {
+        try {
+            // 1. Tải TOÀN BỘ danh sách sản phẩm
+            const res = await fetch(`${API_BASE_URL}/products`);
+            const result = await res.json();
+            const allProducts = result.data || result; 
+    
+            // 2. Dùng Javascript tìm sản phẩm có id trùng khớp
+            // Dùng '==' để ép kiểu an toàn (vì productId là chuỗi, id trong data có thể là số)
+            const product = allProducts.find(p => p.id == productId);
+    
+            // 3. Nếu không tìm thấy ID đó trong danh sách
+            if (!product) {
+                document.getElementById('main-content').innerHTML = `
+                    <div class="text-center py-5">
+                        <h3 class="text-danger mb-4">Sản phẩm này không tồn tại hoặc đã bị xóa!</h3>
+                        <a href="index.html" class="btn btn-primary">Về trang chủ</a>
+                    </div>
+                `;
+                return;
+            }
+    
+            currentProduct = product;
+    
+            // 4. Hiển thị thông tin ra giao diện
+            document.getElementById("product-name").innerText = product.name || "Sản phẩm không có tên";
+            document.getElementById("product-price").innerText = new Intl.NumberFormat('vi-VN').format(product.price || 0) + "₫";
+            document.getElementById("product-description").innerText = product.description || "Sản phẩm này hiện chưa có mô tả chi tiết.";
+    
+            // 5. Xử lý hiển thị ảnh
+            const imageUrl = product.image
+                ? (product.image.startsWith('http') ? product.image : `https://nhom3-backend.onrender.com/storage/${product.image}`)
+                : 'https://dummyimage.com/500x500/cccccc/000000&text=No+Image';
+    
+            document.getElementById("product-image").src = imageUrl;
+    
+        } catch (err) {
+            console.error(err);
+            document.getElementById('main-content').innerHTML = `
+                <div class="text-center py-5">
+                    <h3 class="text-danger mb-4">Lỗi kết nối đến máy chủ! Không thể tải sản phẩm.</h3>
+                    <a href="index.html" class="btn btn-primary">Về trang chủ</a>
+                </div>
+            `;
+        }
     }
     
-    addToCart();
-    window.location.href = "cart.html";
-}
+    // --- CÁC HÀM XỬ LÝ GIỎ HÀNG ---
+    function isLoggedIn() {
+        return localStorage.getItem("user");
+    }
+    
+    async function addToCart() {
+        if (!isLoggedIn()) {
+            alert("Bạn cần đăng nhập để thêm vào giỏ hàng!");
+            window.location.href = "index.html"; 
+            return;
+        }
+    
+        try {
+            await fetch(`${API_BASE_URL}/cart`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    product_id: currentProduct.id,
+                    quantity: 1
+                })
+            });
+    
+            alert("Đã thêm sản phẩm vào giỏ hàng thành công!");
+        } catch (err) {
+            console.error(err);
+            alert("Lỗi khi thêm vào giỏ hàng!");
+        }
+    }
+    
+    function buyNow() {
+        if (!isLoggedIn()) {
+            alert("Bạn cần đăng nhập để mua hàng!");
+            window.location.href = "index.html";
+            return;
+        }
+        
+        addToCart();
+        window.location.href = "cart.html";
+    }
 </script>
 
 </body>
