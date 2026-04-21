@@ -120,28 +120,35 @@
 
             <div class="row g-4" id="featured-products"></div>
                 <script>
-                fetch("https://nhom3-backend.onrender.com/api/products")
-                  .then(res => res.json())
-                  .then(data => {
-                    const container = document.getElementById("featured-products");
-                
-                    data.forEach(product => {
-                      container.innerHTML += `
-                        <div class="col-lg-3">
-                          <div class="card">
-                            <img src="${product.image}" class="card-img-top">
-                            <div class="card-body">
-                              <h5>${product.name}</h5>
-                              <p>${product.price} VND</p>
-                            </div>
-                          </div>
-                        </div>
-                      `;
+                    document.addEventListener("DOMContentLoaded", function () {
+                      fetch("https://nhom3-backend.onrender.com/api/products")
+                        .then(res => res.json())
+                        .then(data => {
+                          const container = document.getElementById("featured-products");
+                          container.innerHTML = "";
+                    
+                          data.forEach(product => {
+                            const image = product.image 
+                              ? "https://nhom3-backend.onrender.com/images/" + product.image
+                              : "https://via.placeholder.com/300";
+                    
+                            container.innerHTML += `
+                              <div class="col-lg-3">
+                                <div class="card">
+                                  <img src="${image}" class="card-img-top">
+                                  <div class="card-body">
+                                    <h5>${product.name}</h5>
+                                    <p>${product.price} VND</p>
+                                  </div>
+                                </div>
+                              </div>
+                            `;
+                          });
+                        })
+                        .catch(err => console.error("Lỗi:", err));
                     });
-                  })
-                  .catch(err => console.error(err));
                 </script>
-        </div>
+            </div>
     </section>
 
     <!-- Chân trang (Footer) -->
