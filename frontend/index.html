@@ -146,8 +146,10 @@
                     
                                 container.innerHTML += `
                                     <div class="col-6 col-md-4 col-lg-3">
-                                        <div class="card">
-                                            <img src="${image}" class="card-img-top">
+                                        <div class="card product-card h-100">
+                                            <div class="product-img-wrapper">
+                                                <img src="${image}" class="product-img">
+                                            </div>
                                             <div class="card-body">
                                                 <h5>${product.name}</h5>
                                                 <p>${product.price} VND</p>
