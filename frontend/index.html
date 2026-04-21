@@ -128,7 +128,29 @@
                         container.innerHTML = ""; 
                         data.forEach(product => { 
                             const image = product.image ? `https://nhom3-backend.onrender.com/images/${product.image}` : "https://via.placeholder.com/300"; 
-                            const html = ` <div class="col-md-3 mb-4"> <div class="card h-100 shadow-sm"> <img src="${image}" class="card-img-top" style="height:200px; object-fit:cover;"> <div class="card-body"> <h5>${product.name}</h5> <p class="text-danger fw-bold"> ${Number(product.price).toLocaleString()} VND </p> <p>Số lượng: ${product.stock}</p> </div> </div> </div> `; 
+                            const html = `
+                                <div class="col-6 col-md-4 col-lg-3">
+                                    <div class="product-card h-100">
+                            
+                                        <img src="${image}" 
+                                             class="w-100 product-img"
+                                             onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+                            
+                                        <div class="p-3">
+                                            <div class="product-title mb-2">${product.name}</div>
+                            
+                                            <div class="price mb-2">
+                                                ${Number(product.price).toLocaleString()} VND
+                                            </div>
+                            
+                                            <div class="stock">
+                                                Còn lại: ${product.stock}
+                                            </div>
+                                        </div>
+                            
+                                    </div>
+                                </div>
+                            `; 
                             container.innerHTML += html; }); } catch (err) { console.error(err); document.getElementById("products").innerHTML = "<p class='text-danger'>Không load được sản phẩm</p>"; } } </script>
             </div>
     </section>
