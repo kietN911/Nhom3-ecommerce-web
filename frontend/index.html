@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F&K FOOD - Trang chủ</title>
+    <title>F&K STORE - Trang chủ</title>
     <link href="./assets/img/favicon.png" rel="icon" type="image/x-icon">
     <link rel="stylesheet" href="./assets/css/main.css">
     <link rel="stylesheet" href="./assets/css/home-responsive.css">
@@ -18,14 +18,14 @@
                 <div class="header-middle-left">
                     <div class="header-logo">
                         <a href="index.html">
-                            <h1 style="color: #B5292F; font-weight: 800; font-size: 30px;">F&K FOOD</h1>
+                            <h1 style="color: #B5292F; font-weight: 800; font-size: 30px;">F&K STORE</h1>
                         </a>
                     </div>
                 </div>
                 <div class="header-middle-center">
                     <form class="form-search" id="search-form">
                         <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input type="text" name="search" class="form-search-input" id="search-input" placeholder="Tìm kiếm món ăn...">
+                        <input type="text" name="search" class="form-search-input" id="search-input" placeholder="Tìm kiếm sản phẩm...">
                         <button class="filter-btn" type="button" id="open-advanced-search"><i class="fa-light fa-filter-list"></i><span>Lọc</span></button>
                     </form>
                 </div>
@@ -58,7 +58,9 @@
     <nav class="header-bottom">
         <div class="container">
             <ul class="menu-list" id="menu-list">
-                <li class="menu-list-item"><a href="index.html" class="menu-link">Trang chủ</a></li>
+                <li class="menu-list-item"><a href="#trangchu" class="menu-link">Trang chủ</a></li>
+                <li class="menu-list-item"><a href="#sanpham" class="menu-link">Sản phẩm</a></li>
+                <li class="menu-list-item"><a href="#gioithieu" class="menu-link">Giới thiệu</a></li>
             </ul>
         </div>
     </nav>
@@ -70,12 +72,12 @@
                     <span>Phân loại </span>
                     <select name="category" id="advanced-search-category-select">
                         <option value="Tất cả">Tất cả</option>
-                        <option value="Món mặn">Món mặn</option>
-                        <option value="Món chay">Món chay</option>
-                        <option value="Món lẩu">Món lẩu</option>
-                        <option value="Món ăn vặt">Món ăn vặt</option>
-                        <option value="Món tráng miệng">Món tráng miệng</option>
-                        <option value="Nước uống">Nước uống</option>
+                        <option value="Điện tử">Điện tử</option>
+                        <option value="Thời trang">Thời trang</option>
+                        <option value="Gia dụng">Gia dụng</option>
+                        <option value="Làm đẹp">Làm đẹp</option>
+                        <option value="Phụ kiện">Phụ kiện</option>
+                        <option value="Sách & Văn phòng">Sách & Văn phòng</option>
                     </select>
                 </div>
                 <div class="advanced-search-price">
@@ -96,11 +98,11 @@
     <main class="main-wrapper">
         <div class="container" id="trangchu">
             <div class="home-slider">
-                <img src="./assets/img/banner-1.png" alt="F&K FOOD Banner">
+                <img src="./assets/img/banner-1.png" alt="F&K STORE Banner">
             </div>
 
-            <div class="home-title-block" id="home-title">
-                <h2 class="home-title">Thực đơn F&K FOOD</h2>
+            <div class="home-title-block" id="sanpham">
+                <h2 class="home-title">Sản phẩm nổi bật F&K STORE</h2>
             </div>
 
             <div class="home-products" id="home-products"></div>
@@ -125,7 +127,7 @@
             <div class="forms mdl-cnt">
                 <div class="form-content sign-up">
                     <h3 class="form-title">Đăng ký tài khoản</h3>
-                    <p class="form-description">Đăng ký thành viên để mua hàng và nhận những ưu đãi đặc biệt từ chúng tôi</p>
+                    <p class="form-description">Đăng ký thành viên để mua sắm thuận tiện và nhận ưu đãi mới nhất từ chúng tôi</p>
                     <form action="" class="signup-form">
                         <div class="form-group">
                             <label for="fullname" class="form-label">Tên đầy đủ</label>
@@ -158,7 +160,7 @@
                 </div>
                 <div class="form-content login">
                     <h3 class="form-title">Đăng nhập tài khoản</h3>
-                    <p class="form-description">Đăng nhập thành viên để mua hàng và nhận những ưu đãi đặc biệt từ chúng tôi</p>
+                    <p class="form-description">Đăng nhập để theo dõi đơn hàng, lưu giỏ hàng và nhận ưu đãi thành viên</p>
                     <form action="" class="login-form">
                         <div class="form-group">
                             <label for="phone-login" class="form-label">Số điện thoại</label>
@@ -197,7 +199,7 @@
                     <p class="text-price">0đ</p>
                 </div>
                 <div class="cart-footer-payment">
-                    <button class="them-mon"><i class="fa-regular fa-plus"></i> Thêm món</button>
+                    <button class="them-mon"><i class="fa-regular fa-plus"></i> Thêm sản phẩm</button>
                     <button class="thanh-toan disabled">Thanh toán</button>
                 </div>
             </div>
@@ -209,7 +211,7 @@
             <div class="footer-top">
                 <div class="footer-top-content">
                     <div class="footer-top-img">
-                        <a href="index.html"><h1 style="color: #B5292F;">F&K FOOD</h1></a>
+                        <a href="index.html"><h1 style="color: #B5292F;">F&K STORE</h1></a>
                     </div>
                     <div class="footer-top-subbox">
                         <div class="footer-top-subs">
@@ -230,10 +232,10 @@
         <div class="widget-area">
             <div class="container">
                 <div class="widget-row">
-                    <div class="widget-row-col-1">
+                    <div class="widget-row-col-1" id="gioithieu">
                         <h3 class="widget-title">Về chúng tôi</h3>
                         <div class="widget-row-col-content">
-                            <p>F&K FOOD là thương hiệu uy tín, cam kết chất lượng sản phẩm lên hàng đầu.</p>
+                            <p>F&K STORE là cửa hàng online đa ngành, mang đến sản phẩm chất lượng với trải nghiệm mua sắm tiện lợi.</p>
                         </div>
                         <div class="widget-social">
                             <div class="widget-social-item"><a href=""><i class="fab fa-facebook-f"></i></a></div>
@@ -244,7 +246,7 @@
                         <h3 class="widget-title">Liên kết</h3>
                         <ul class="widget-contact">
                             <li class="widget-contact-item"><a href=""><i class="fa-solid fa-chevron-right"></i><span>Về chúng tôi</span></a></li>
-                            <li class="widget-contact-item"><a href=""><i class="fa-solid fa-chevron-right"></i><span>Thực đơn</span></a></li>
+                            <li class="widget-contact-item"><a href=""><i class="fa-solid fa-chevron-right"></i><span>Sản phẩm</span></a></li>
                         </ul>
                     </div>
                     <div class="widget-row-col-1">
@@ -267,7 +269,7 @@
     <div class="copyright-wrap">
         <div class="container">
             <div class="copyright-content">
-                <p>Copyright 2025 F&K FOOD. All Rights Reserved.</p>
+                <p>Copyright 2025 F&K STORE. All Rights Reserved.</p>
             </div>
         </div>
     </div>
@@ -281,7 +283,7 @@
     <script src="./js/checkout.js"></script>
     <script src="./js/toast-message.js"></script>
     <script>
-        const categories = ["Món chay", "Món mặn", "Món lẩu", "Món ăn vặt", "Món tráng miệng", "Nước uống"];
+        const categories = ["Điện tử", "Thời trang", "Gia dụng", "Làm đẹp", "Phụ kiện", "Sách & Văn phòng"];
         const state = {
             allProducts: [],
             filteredProducts: [],
@@ -297,22 +299,6 @@
         function closeCart() {}
         function closeSearchAdvanced() {
             document.querySelector(".advanced-search").classList.remove("open");
-        }
-
-        function buildMenu() {
-            const menuList = document.getElementById("menu-list");
-            categories.forEach((cat) => {
-                const item = document.createElement("li");
-                item.className = "menu-list-item";
-                item.innerHTML = `<a href="javascript:;" class="menu-link" data-category="${cat}">${cat}</a>`;
-                menuList.appendChild(item);
-            });
-            menuList.addEventListener("click", (event) => {
-                const link = event.target.closest("[data-category]");
-                if (!link) return;
-                document.getElementById("advanced-search-category-select").value = link.dataset.category;
-                applyFilters(1);
-            });
         }
 
         function readFilters() {
@@ -344,7 +330,7 @@
             const items = state.filteredProducts.slice(start, start + state.limit);
 
             if (!items.length) {
-                container.innerHTML = '<div class="no-result"><div class="no-result-i"><i class="fa-light fa-face-sad-cry"></i></div><div class="no-result-h">Không tìm thấy món nào!</div></div>';
+                container.innerHTML = '<div class="no-result"><div class="no-result-i"><i class="fa-light fa-face-sad-cry"></i></div><div class="no-result-h">Không tìm thấy sản phẩm nào!</div></div>';
                 return;
             }
 
@@ -367,7 +353,7 @@
                                     <span class="current-price">${vnd(product.price)}</span>
                                 </div>
                                 <div class="product-buy">
-                                    <button class="card-button order-item" data-detail="${product.id}"><i class="fa-regular fa-cart-shopping-fast"></i> Đặt món</button>
+                                    <button class="card-button order-item" data-detail="${product.id}"><i class="fa-regular fa-cart-shopping-fast"></i> Mua ngay</button>
                                 </div>
                             </div>
                         </div>
@@ -445,7 +431,6 @@
             closeSearchAdvanced();
         });
 
-        buildMenu();
         loadProducts();
     </script>
 </body>

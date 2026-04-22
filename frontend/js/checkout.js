@@ -70,7 +70,7 @@ function xulyDathang(product) {
                 currentUser.cart = [];
                 localStorage.setItem("currentuser", JSON.stringify(currentUser));
             }
-            toast({ title: 'Thành công', message: 'Cảm ơn bạn đã đặt món tại F&K FOOD!', type: 'success' });
+            toast({ title: 'Thành công', message: 'Cảm ơn bạn đã mua sắm tại F&K STORE!', type: 'success' });
             setTimeout(() => { window.location = "/"; }, 2000);
         } else {
             toast({ title: 'Lỗi', message: data.message, type: 'error' });
@@ -148,7 +148,7 @@ function xulyDathang(product) {
                 currentUser.cart = [];
                 localStorage.setItem("currentuser", JSON.stringify(currentUser));
             }
-            toast({ title: 'Thành công', message: 'Cảm ơn bạn đã đặt món tại F&K FOOD!', type: 'success' });
+            toast({ title: 'Thành công', message: 'Cảm ơn bạn đã mua sắm tại F&K STORE!', type: 'success' });
             setTimeout(() => { window.location = "/"; }, 2000);
         } else {
             toast({ title: 'Lỗi', message: data.message, type: 'error' });

@@ -56,7 +56,7 @@ function showModalDetail(infoProduct) {
     // Render nội dung Modal
     let modalHtml = `
     <div class="modal-header">
-        <img class="product-image" src="${infoProduct.img}" alt="" onerror="this.src='./assets/img/products/nam-dui-ga-chay-toi.jpeg'">
+        <img class="product-image" src="${infoProduct.img}" alt="" onerror="this.src='./assets/img/blank-image.png'">
     </div>
     <div class="modal-body">
         <h2 class="product-title">${infoProduct.title}</h2>
@@ -82,7 +82,7 @@ function showModalDetail(infoProduct) {
             <span class="price">${vnd(infoProduct.price)}</span>
         </div>
         <div class="modal-footer-control">
-            <button class="button-dathangngay" onclick="muaNgay(${infoProduct.id})">Đặt hàng ngay</button>
+            <button class="button-dathangngay" onclick="muaNgay(${infoProduct.id})">Mua ngay</button>
             <button class="button-dat" onclick="addToCartJS(${infoProduct.id}, '${infoProduct.title}', '${infoProduct.img}', ${infoProduct.price})"><i class="fa-light fa-basket-shopping"></i> Thêm vào giỏ</button>
         </div>
     </div>`;
@@ -141,7 +141,7 @@ function addToCartJS(id, title, img, price) {
     let currentuser = JSON.parse(localStorage.getItem('currentuser'));
     let cart = currentuser.cart || [];
 
-    // Check trùng món
+    // Check trùng sản phẩm
     let index = cart.findIndex(item => item.id == id);
     if(index !== -1) {
         cart[index].soluong += soluong;
@@ -155,7 +155,7 @@ function addToCartJS(id, title, img, price) {
     
     updateAmount();
     closeModal();
-    showToast('Thành công', 'Đã thêm món vào giỏ!', 'success');
+    showToast('Thành công', 'Đã thêm sản phẩm vào giỏ!', 'success');
 }
 
 function updateAmount() {
@@ -177,7 +177,7 @@ function muaNgay(id) {
     let title = document.querySelector('.product-title').innerText;
     // ... (Cần truyền đủ thông tin). 
     // Để đơn giản, ta alert hướng dẫn
-    alert("Chức năng Mua ngay đang được cập nhật. Vui lòng Thêm vào giỏ hàng để thanh toán.");
+    alert("Chức năng Mua ngay đang được cập nhật. Vui lòng thêm vào giỏ hàng để thanh toán.");
 }
 
 // --- 5. ĐĂNG NHẬP / ĐĂNG KÝ (GỌI API PHP) ---

@@ -55,7 +55,7 @@ class OrderController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Đặt hàng F&K FOOD thành công!',
+            'message' => 'Đặt hàng tại F&K STORE thành công!',
         ]);
     }
 }
