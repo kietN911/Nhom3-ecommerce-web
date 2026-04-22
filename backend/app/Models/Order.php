@@ -14,12 +14,19 @@ class Order extends Model
         'user_id',
         'fullname',
         'phone',
+        'email',
         'address',
         'total_money',
+        'shipping_fee',
+        'discount_amount',
         'note',
         'shipping_method',
+        'payment_method',
+        'payment_status',
+        'shipping_status',
         'status',
         'order_date',
+        'confirmed_at',
     ];
 
     public $incrementing = false;
@@ -34,8 +41,11 @@ class Order extends Model
     {
         return [
             'total_money' => 'integer',
+            'shipping_fee' => 'integer',
+            'discount_amount' => 'integer',
             'status' => 'integer',
             'order_date' => 'datetime',
+            'confirmed_at' => 'datetime',
         ];
     }
 }

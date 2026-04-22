@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -99,7 +101,11 @@ class AdminController extends Controller
 
     public function confirmOrder(Order $order): JsonResponse
     {
-        $order->update(['status' => 1]);
+        $order->update([
+            'status' => 1,
+            'shipping_status' => 'processing',
+            'confirmed_at' => now(),
+        ]);
 
         return response()->json([
             'status' => 'success',
@@ -129,12 +135,40 @@ class AdminController extends Controller
             $imagePath = './assets/img/products/'.$filename;
         }
 
+        $categoryName = $validated['category'] ?? null;
+        $categoryId = null;
+
+        if ($categoryName) {
+            $category = Category::query()->firstOrCreate(
+                ['slug' => Str::slug($categoryName)],
+                [
+                    'name' => $categoryName,
+                    'description' => 'Danh mục sản phẩm '.$categoryName,
+                    'status' => 1,
+                ]
+            );
+
+            $categoryId = $category->id;
+        }
+
+        $title = $validated['ten-mon'];
+        $slug = Str::slug($title);
+
         return [
-            'title' => $validated['ten-mon'],
-            'category' => $validated['category'] ?? null,
+            'title' => $title,
+            'slug' => $slug ?: 'san-pham-'.time(),
+            'sku' => 'SKU-'.strtoupper(Str::random(8)),
+            'category' => $categoryName,
+            'category_id' => $categoryId,
+            'brand' => 'F&K Store',
             'price' => $validated['gia-moi'],
+            'original_price' => $validated['gia-moi'],
+            'sale_price' => $validated['gia-moi'],
             'description' => $validated['mo-ta'] ?? null,
+            'short_description' => Str::limit(strip_tags((string) ($validated['mo-ta'] ?? '')), 160, ''),
             'img' => $imagePath,
+            'stock_quantity' => 100,
+            'is_featured' => 1,
             'status' => 1,
         ];
     }

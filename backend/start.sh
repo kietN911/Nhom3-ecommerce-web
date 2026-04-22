@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-echo "Starting Laravel on Render..."
+echo "Starting Laravel on Railway..."
 echo "PORT=${PORT:-10000}"
 
 mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache

@@ -14,8 +14,12 @@ class OrderDetail extends Model
     protected $fillable = [
         'order_id',
         'product_id',
+        'product_title',
+        'product_sku',
+        'product_image',
         'quantity',
         'price',
+        'subtotal',
         'note',
     ];
 
@@ -29,6 +33,7 @@ class OrderDetail extends Model
             'product_id' => 'integer',
             'quantity' => 'integer',
             'price' => 'integer',
+            'subtotal' => 'integer',
         ];
     }
 }

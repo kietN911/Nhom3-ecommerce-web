@@ -21,9 +21,13 @@ class User extends Authenticatable
     protected $fillable = [
         'fullname',
         'phone',
+        'email',
         'password',
+        'avatar',
+        'default_address',
         'status',
         'user_type',
+        'last_login_at',
     ];
 
     /**
@@ -47,6 +51,7 @@ class User extends Authenticatable
             'password' => 'hashed',
             'status' => 'integer',
             'user_type' => 'integer',
+            'last_login_at' => 'datetime',
         ];
     }
 }
