@@ -6,17 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Schema;
 
 class ProductController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        $query = Product::query()->orderByDesc('id');
-
-        if (Schema::hasColumn('products', 'status')) {
-            $query->where('status', 1);
-        }
+        $query = Product::query()
+            ->where('status', 1)
+            ->orderByDesc('id');
 
         if ($request->filled('search')) {
             $query->where('title', 'like', '%'.$request->string('search')->toString().'%');

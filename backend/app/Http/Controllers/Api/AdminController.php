@@ -9,80 +9,44 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Schema;
 
 class AdminController extends Controller
 {
     public function dashboard(): JsonResponse
     {
-        $productQuery = Product::query();
-        if (Schema::hasColumn('products', 'status')) {
-            $productQuery->where('status', 1);
-        }
-
-        $orderQuery = Order::query();
-        if (Schema::hasColumn('orders', 'status')) {
-            $orderQuery->where('status', 1);
-        }
-
-        $userQuery = User::query();
-        if (Schema::hasColumn('users', 'user_type')) {
-            $userQuery->where('user_type', 0);
-        }
-
         return response()->json([
-            'count_users' => $userQuery->count(),
-            'count_products' => $productQuery->count(),
-            'total_revenue' => (int) $orderQuery->sum('total_money'),
+            'count_users' => User::query()->where('user_type', 0)->count(),
+            'count_products' => Product::query()->where('status', 1)->count(),
+            'total_revenue' => (int) Order::query()->where('status', 1)->sum('total_money'),
         ]);
     }
 
     public function users(): JsonResponse
     {
-        $query = User::query()->orderByDesc('id');
-        if (Schema::hasColumn('users', 'user_type')) {
-            $query->where('user_type', 0);
-        }
-
-        $columns = ['id', 'fullname', 'phone'];
-        if (Schema::hasColumn('users', 'created_at')) {
-            $columns[] = 'created_at';
-        }
-        if (Schema::hasColumn('users', 'status')) {
-            $columns[] = 'status';
-        }
-
         return response()->json(
-            $query->get($columns)
+            User::query()
+                ->where('user_type', 0)
+                ->orderByDesc('id')
+                ->get(['id', 'fullname', 'phone', 'created_at', 'status'])
         );
     }
 
     public function orders(): JsonResponse
     {
-        $columns = ['id', 'fullname', 'phone', 'total_money'];
-        if (Schema::hasColumn('orders', 'order_date')) {
-            $columns[] = 'order_date';
-        }
-        if (Schema::hasColumn('orders', 'status')) {
-            $columns[] = 'status';
-        }
-
         return response()->json(
             Order::query()
                 ->orderByDesc('order_date')
-                ->get($columns)
+                ->get(['id', 'fullname', 'phone', 'order_date', 'total_money', 'status'])
         );
     }
 
     public function products(): JsonResponse
     {
-        $query = Product::query()->orderByDesc('id');
-        if (Schema::hasColumn('products', 'status')) {
-            $query->where('status', 1);
-        }
-
         return response()->json(
-            $query->get()
+            Product::query()
+                ->where('status', 1)
+                ->orderByDesc('id')
+                ->get()
         );
     }
 
@@ -113,11 +77,7 @@ class AdminController extends Controller
 
     public function deleteProduct(Product $product): JsonResponse
     {
-        if (Schema::hasColumn('products', 'status')) {
-            $product->update(['status' => 0]);
-        } else {
-            $product->delete();
-        }
+        $product->update(['status' => 0]);
 
         return response()->json([
             'status' => 'success',
@@ -175,7 +135,7 @@ class AdminController extends Controller
             'price' => $validated['gia-moi'],
             'description' => $validated['mo-ta'] ?? null,
             'img' => $imagePath,
-            ...(Schema::hasColumn('products', 'status') ? ['status' => 1] : []),
+            'status' => 1,
         ];
     }
 }
