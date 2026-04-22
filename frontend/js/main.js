@@ -83,7 +83,7 @@ function showModalDetail(infoProduct) {
         </div>
         <div class="modal-footer-control">
             <button class="button-dathangngay" onclick="muaNgay(${infoProduct.id})">Mua ngay</button>
-            <button class="button-dat" onclick="addToCartJS(${infoProduct.id}, '${infoProduct.title}', '${infoProduct.img}', ${infoProduct.price})"><i class="fa-light fa-basket-shopping"></i> Thêm vào giỏ</button>
+            <button class="button-dat" onclick="addToCartJS(${infoProduct.id}, '${infoProduct.title}', '${infoProduct.img}', ${infoProduct.price})"><span class="icon-symbol" aria-hidden="true">+</span> Thêm vào giỏ</button>
         </div>
     </div>`;
 
@@ -212,7 +212,7 @@ function renderCart() {
             <div class="cart-item-info">
                 <div class="cart-item-title">
                     <strong>${item.title}</strong>
-                    ${item.note ? `<div class="product-note"><i class="fa-light fa-note-sticky"></i>${item.note}</div>` : ''}
+                    ${item.note ? `<div class="product-note"><span class="icon-symbol" aria-hidden="true">-</span> ${item.note}</div>` : ''}
                 </div>
                 <div class="cart-item-price">${vnd(item.price * item.soluong)}</div>
             </div>

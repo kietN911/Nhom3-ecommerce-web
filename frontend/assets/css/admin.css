@@ -1244,7 +1244,8 @@ label a {
 
 .btn-chuaxuly::before {
     content: "\f00d";
-    font-family: "Font Awesome 6 Pro";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
     position: absolute;
     left: 22px;
 }
@@ -1255,7 +1256,8 @@ label a {
 
 .btn-daxuly::before {
     content: "\f00c";
-    font-family: "Font Awesome 6 Pro";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
     position: absolute;
     left: 22px;
 }

@@ -12,7 +12,7 @@
 </head>
 <body>
     <header class="header">
-        <button class="menu-icon-btn"><div class="menu-icon"><i class="fa-regular fa-bars"></i></div></button>
+        <button class="menu-icon-btn"><div class="menu-icon"><i class="fa-solid fa-bars"></i></div></button>
     </header>
     <div class="container">
         <aside class="sidebar open">
@@ -88,12 +88,12 @@
                 <div class="admin-control">
                     <div class="admin-control-center">
                         <form class="form-search" id="product-search-form">
-                            <span class="search-btn"><i class="fa-light fa-magnifying-glass"></i></span>
+                            <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span>
                             <input type="text" id="product-search-input" class="form-search-input" placeholder="Tìm kiếm tên sản phẩm...">
                         </form>
                     </div>
                     <div class="admin-control-right">
-                        <button class="btn-control-large" id="btn-add-product"><i class="fa-light fa-plus"></i> Thêm sản phẩm mới</button>
+                        <button class="btn-control-large" id="btn-add-product"><i class="fa-solid fa-plus"></i> Thêm sản phẩm mới</button>
                     </div>
                 </div>
                 <div id="show-product"></div>
@@ -148,7 +148,7 @@
     <div class="modal add-product">
         <div class="modal-container">
             <h3 class="modal-container-title">THÔNG TIN SẢN PHẨM</h3>
-            <button class="modal-close product-form"><i class="fa-regular fa-xmark"></i></button>
+            <button class="modal-close product-form"><i class="fa-solid fa-xmark"></i></button>
             <div class="modal-content">
                 <form enctype="multipart/form-data" class="add-product-form" id="admin-product-form">
                     <input type="hidden" id="prod-id" name="id">
@@ -156,7 +156,7 @@
                     <div class="modal-content-left">
                         <img src="./assets/img/blank-image.png" alt="" class="upload-image-preview" id="preview-img">
                         <div class="form-group file">
-                            <label for="up-hinh-anh" class="form-label-file"><i class="fa-regular fa-cloud-arrow-up"></i>Chọn hình ảnh</label>
+                            <label for="up-hinh-anh" class="form-label-file"><i class="fa-solid fa-cloud-arrow-up"></i>Chọn hình ảnh</label>
                             <input accept="image/jpeg, image/png, image/jpg" id="up-hinh-anh" name="up-hinh-anh" type="file" class="form-control" onchange="uploadImage(this)">
                         </div>
                     </div>
@@ -184,7 +184,7 @@
                             <label class="form-label">Mô tả</label>
                             <textarea class="product-desc" id="mo-ta" name="mo-ta" placeholder="Nhập mô tả..."></textarea>
                         </div>
-                        <button class="form-submit" type="submit"><i class="fa-regular fa-floppy-disk"></i> LƯU SẢN PHẨM</button>
+                        <button class="form-submit" type="submit"><i class="fa-solid fa-floppy-disk"></i> LƯU SẢN PHẨM</button>
                     </div>
                 </form>
             </div>
@@ -359,7 +359,7 @@
                         <td>${user.phone}</td>
                         <td>${user.created_at ?? ""}</td>
                         <td>${user.status == 1 ? '<span class="status-complete">Hoạt động</span>' : '<span class="status-no-complete">Bị khóa</span>'}</td>
-                        <td><button class="btn-delete" type="button" data-toggle-user-id="${user.id}"><i class="fa-regular fa-lock"></i> ${user.status == 1 ? "Khóa" : "Mở"}</button></td>
+                        <td><button class="btn-delete" type="button" data-toggle-user-id="${user.id}"><i class="fa-solid fa-lock"></i> ${user.status == 1 ? "Khóa" : "Mở"}</button></td>
                     </tr>
                 `).join("");
             } catch (error) {

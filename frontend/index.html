@@ -26,7 +26,7 @@
                     <form class="form-search" id="search-form">
                         <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span>
                         <input type="text" name="search" class="form-search-input" id="search-input" placeholder="Tìm kiếm sản phẩm...">
-                        <button class="filter-btn" type="button" id="open-advanced-search"><i class="fa-light fa-filter-list"></i><span>Lọc</span></button>
+                        <button class="filter-btn" type="button" id="open-advanced-search"><i class="fa-solid fa-filter"></i><span>Lọc</span></button>
                     </form>
                 </div>
                 <div class="header-middle-right">
@@ -35,7 +35,7 @@
                             <i class="fa-solid fa-user"></i>
                             <div class="auth-container">
                                 <span class="text-dndk">Đăng nhập / Đăng ký</span>
-                                <span class="text-tk">Tài khoản <i class="fa-sharp fa-solid fa-caret-down"></i></span>
+                                <span class="text-tk">Tài khoản <i class="fa-solid fa-caret-down"></i></span>
                             </div>
                             <ul class="header-middle-right-menu">
                                 <li><a id="login" href="javascript:;"><i class="fa-solid fa-right-to-bracket me-2"></i> Đăng nhập</a></li>
@@ -85,11 +85,11 @@
                     <input type="number" name="min_price" placeholder="tối thiểu" id="min-price">
                     <span>đến</span>
                     <input type="number" name="max_price" placeholder="tối đa" id="max-price">
-                    <button id="advanced-search-price-btn" type="submit"><i class="fa-light fa-magnifying-glass-dollar"></i></button>
+                    <button id="advanced-search-price-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
                 <div class="advanced-search-control">
-                    <button type="button" id="reset-search"><i class="fa-light fa-arrow-rotate-right"></i></button>
-                    <button type="button" id="close-advanced-search"><i class="fa-light fa-xmark"></i></button>
+                    <button type="button" id="reset-search"><i class="fa-solid fa-arrow-rotate-right"></i></button>
+                    <button type="button" id="close-advanced-search"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </form>
         </div>
@@ -117,7 +117,7 @@
     </main>
 
     <div class="modal product-detail">
-        <button class="modal-close close-popup"><i class="fa-thin fa-xmark"></i></button>
+        <button class="modal-close close-popup"><span class="icon-symbol" aria-hidden="true">&times;</span></button>
         <div class="modal-container mdl-cnt" id="product-detail-content"></div>
     </div>
 
@@ -183,12 +183,12 @@
     <div class="modal-cart">
         <div class="cart-container">
             <div class="cart-header">
-                <h3 class="cart-header-title"><i class="fa-regular fa-basket-shopping-simple"></i> Giỏ hàng</h3>
-                <button class="cart-close" onclick="closeCart()"><i class="fa-sharp fa-solid fa-xmark"></i></button>
+                <h3 class="cart-header-title"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</h3>
+                <button class="cart-close" onclick="closeCart()"><span class="icon-symbol" aria-hidden="true">&times;</span></button>
             </div>
             <div class="cart-body">
                 <div class="gio-hang-trong">
-                    <i class="fa-thin fa-cart-xmark"></i>
+                    <i class="fa-solid fa-cart-shopping"></i>
                     <p>Không có sản phẩm nào trong giỏ hàng của bạn</p>
                 </div>
                 <ul class="cart-list"></ul>
@@ -199,7 +199,7 @@
                     <p class="text-price">0đ</p>
                 </div>
                 <div class="cart-footer-payment">
-                    <button class="them-mon"><i class="fa-regular fa-plus"></i> Thêm sản phẩm</button>
+                    <button class="them-mon"><i class="fa-solid fa-plus"></i> Thêm sản phẩm</button>
                     <button class="thanh-toan disabled">Thanh toán</button>
                 </div>
             </div>
@@ -274,7 +274,7 @@
         </div>
     </div>
     <div class="back-to-top">
-        <a href="#"><i class="fa-regular fa-arrow-up"></i></a>
+        <a href="#"><span class="icon-symbol" aria-hidden="true">&uarr;</span></a>
     </div>
 
     <div id="toast"></div>
@@ -328,7 +328,7 @@
             const items = state.filteredProducts.slice(start, start + state.limit);
 
             if (!items.length) {
-                container.innerHTML = '<div class="no-result"><div class="no-result-i"><i class="fa-light fa-face-sad-cry"></i></div><div class="no-result-h">Không tìm thấy sản phẩm nào!</div></div>';
+                container.innerHTML = '<div class="no-result"><div class="no-result-i"><i class="fa-solid fa-face-frown"></i></div><div class="no-result-h">Không tìm thấy sản phẩm nào!</div></div>';
                 return;
             }
 
@@ -351,7 +351,7 @@
                                     <span class="current-price">${vnd(product.price)}</span>
                                 </div>
                                 <div class="product-buy">
-                                    <button class="card-button order-item" data-detail="${product.id}"><i class="fa-regular fa-cart-shopping-fast"></i> Mua ngay</button>
+                                    <button class="card-button order-item" data-detail="${product.id}"><i class="fa-solid fa-cart-shopping"></i> Mua ngay</button>
                                 </div>
                             </div>
                         </div>

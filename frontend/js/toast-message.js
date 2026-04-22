@@ -14,7 +14,7 @@ function toast({
         },duration+1000);
         //Remove toast when click btn close
         toast.onclick = function(e){
-            if(e.target.closest('.fa-regular')){
+            if(e.target.closest('.toast__close')){
                 main.removeChild(toast);
                 clearTimeout(autoRemove);
             }
@@ -47,7 +47,7 @@ function toast({
             </p>
         </div>
         <div class="toast__close">
-            <i class="fa-regular fa-circle-xmark"></i>
+            <i class="fa-solid fa-circle-xmark"></i>
         </div>
     </div>
     <div class="toast__background"style="background-color: ${color};">
