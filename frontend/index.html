@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F&K FOOD - Trang chủ</title>
+    <link href="./assets/img/favicon.png" rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/home-responsive.css">
+    <link rel="stylesheet" href="./assets/css/toast-message.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-middle">
+            <div class="container">
+                <div class="header-middle-left">
+                    <div class="header-logo">
+                        <a href="index.html">
+                            <h1 style="color: #B5292F; font-weight: 800; font-size: 30px;">F&K FOOD</h1>
+                        </a>
+                    </div>
+                </div>
+                <div class="header-middle-center">
+                    <form class="form-search" id="search-form">
+                        <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" name="search" class="form-search-input" id="search-input" placeholder="Tìm kiếm món ăn...">
+                        <button class="filter-btn" type="button" id="open-advanced-search"><i class="fa-light fa-filter-list"></i><span>Lọc</span></button>
+                    </form>
+                </div>
+                <div class="header-middle-right">
+                    <ul class="header-middle-right-list">
+                        <li class="header-middle-right-item dropdown open">
+                            <i class="fa-solid fa-user"></i>
+                            <div class="auth-container">
+                                <span class="text-dndk">Đăng nhập / Đăng ký</span>
+                                <span class="text-tk">Tài khoản <i class="fa-sharp fa-solid fa-caret-down"></i></span>
+                            </div>
+                            <ul class="header-middle-right-menu">
+                                <li><a id="login" href="javascript:;"><i class="fa-solid fa-right-to-bracket me-2"></i> Đăng nhập</a></li>
+                                <li><a id="signup" href="javascript:;"><i class="fa-solid fa-user-plus me-2"></i> Đăng ký</a></li>
+                            </ul>
+                        </li>
+                        <li class="header-middle-right-item open" onclick="openCart()">
+                            <div class="cart-icon-menu">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <span class="count-product-cart">0</span>
+                            </div>
+                            <span>Giỏ hàng</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="header-bottom">
+        <div class="container">
+            <ul class="menu-list" id="menu-list">
+                <li class="menu-list-item"><a href="index.html" class="menu-link">Trang chủ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="advanced-search">
+        <div class="container">
+            <form id="advanced-search-form" style="display:flex; align-items:center; width:100%">
+                <div class="advanced-search-category">
+                    <span>Phân loại </span>
+                    <select name="category" id="advanced-search-category-select">
+                        <option value="Tất cả">Tất cả</option>
+                        <option value="Món mặn">Món mặn</option>
+                        <option value="Món chay">Món chay</option>
+                        <option value="Món lẩu">Món lẩu</option>
+                        <option value="Món ăn vặt">Món ăn vặt</option>
+                        <option value="Món tráng miệng">Món tráng miệng</option>
+                        <option value="Nước uống">Nước uống</option>
+                    </select>
+                </div>
+                <div class="advanced-search-price">
+                    <span>Giá từ</span>
+                    <input type="number" name="min_price" placeholder="tối thiểu" id="min-price">
+                    <span>đến</span>
+                    <input type="number" name="max_price" placeholder="tối đa" id="max-price">
+                    <button id="advanced-search-price-btn" type="submit"><i class="fa-light fa-magnifying-glass-dollar"></i></button>
+                </div>
+                <div class="advanced-search-control">
+                    <button type="button" id="reset-search"><i class="fa-light fa-arrow-rotate-right"></i></button>
+                    <button type="button" id="close-advanced-search"><i class="fa-light fa-xmark"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <main class="main-wrapper">
+        <div class="container" id="trangchu">
+            <div class="home-slider">
+                <img src="./assets/img/banner-1.png" alt="F&K FOOD Banner">
+            </div>
+
+            <div class="home-title-block" id="home-title">
+                <h2 class="home-title">Thực đơn F&K FOOD</h2>
+            </div>
+
+            <div class="home-products" id="home-products"></div>
+
+            <div class="page-nav">
+                <ul class="page-nav-list" id="page-nav-list"></ul>
+            </div>
+        </div>
+
+        <div class="container" id="account-user"></div>
+        <div class="container" id="order-history"></div>
+    </main>
+
+    <div class="modal product-detail">
+        <button class="modal-close close-popup"><i class="fa-thin fa-xmark"></i></button>
+        <div class="modal-container mdl-cnt" id="product-detail-content"></div>
+    </div>
+
+    <div class="modal signup-login">
+        <div class="modal-container">
+            <button class="form-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="forms mdl-cnt">
+                <div class="form-content sign-up">
+                    <h3 class="form-title">Đăng ký tài khoản</h3>
+                    <p class="form-description">Đăng ký thành viên để mua hàng và nhận những ưu đãi đặc biệt từ chúng tôi</p>
+                    <form action="" class="signup-form">
+                        <div class="form-group">
+                            <label for="fullname" class="form-label">Tên đầy đủ</label>
+                            <input id="fullname" name="fullname" type="text" placeholder="VD: Nhật Sinh" class="form-control">
+                            <span class="form-message-name form-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Số điện thoại</label>
+                            <input id="phone" name="phone" type="text" placeholder="Nhập số điện thoại" class="form-control">
+                            <span class="form-message-phone form-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="form-label">Mật khẩu</label>
+                            <input id="password" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
+                            <span class="form-message-password form-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+                            <input id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu" type="password" class="form-control">
+                            <span class="form-message-password-confi form-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <input class="checkbox" name="checkbox" required type="checkbox" id="checkbox-signup">
+                            <label for="checkbox-signup" class="form-checkbox">Tôi đồng ý với <a href="#" title="chính sách trang web" target="_blank">chính sách trang web</a></label>
+                            <p class="form-message-checkbox form-message"></p>
+                        </div>
+                        <button class="form-submit" id="signup-button">Đăng ký</button>
+                    </form>
+                    <p class="change-login">Bạn đã có tài khoản ? <a href="javascript:;" class="login-link">Đăng nhập ngay</a></p>
+                </div>
+                <div class="form-content login">
+                    <h3 class="form-title">Đăng nhập tài khoản</h3>
+                    <p class="form-description">Đăng nhập thành viên để mua hàng và nhận những ưu đãi đặc biệt từ chúng tôi</p>
+                    <form action="" class="login-form">
+                        <div class="form-group">
+                            <label for="phone-login" class="form-label">Số điện thoại</label>
+                            <input id="phone-login" name="phone" type="text" placeholder="Nhập số điện thoại" class="form-control">
+                            <span class="form-message phonelog"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="password-login" class="form-label">Mật khẩu</label>
+                            <input id="password-login" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
+                            <span class="form-message-check-login form-message"></span>
+                        </div>
+                        <button class="form-submit" id="login-button">Đăng nhập</button>
+                    </form>
+                    <p class="change-login">Bạn chưa có tài khoản ? <a href="javascript:;" class="signup-link">Đăng kí ngay</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-cart">
+        <div class="cart-container">
+            <div class="cart-header">
+                <h3 class="cart-header-title"><i class="fa-regular fa-basket-shopping-simple"></i> Giỏ hàng</h3>
+                <button class="cart-close" onclick="closeCart()"><i class="fa-sharp fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="cart-body">
+                <div class="gio-hang-trong">
+                    <i class="fa-thin fa-cart-xmark"></i>
+                    <p>Không có sản phẩm nào trong giỏ hàng của bạn</p>
+                </div>
+                <ul class="cart-list"></ul>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total-price">
+                    <p class="text-tt">Tổng tiền:</p>
+                    <p class="text-price">0đ</p>
+                </div>
+                <div class="cart-footer-payment">
+                    <button class="them-mon"><i class="fa-regular fa-plus"></i> Thêm món</button>
+                    <button class="thanh-toan disabled">Thanh toán</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-top-content">
+                    <div class="footer-top-img">
+                        <a href="index.html"><h1 style="color: #B5292F;">F&K FOOD</h1></a>
+                    </div>
+                    <div class="footer-top-subbox">
+                        <div class="footer-top-subs">
+                            <h2 class="footer-top-subs-title">Đăng ký nhận tin</h2>
+                            <p class="footer-top-subs-text">Nhận thông tin mới nhất từ chúng tôi</p>
+                        </div>
+                        <form class="form-ground">
+                            <input type="email" class="form-ground-input" placeholder="Nhập email của bạn">
+                            <button class="form-ground-btn">
+                                <span>ĐĂNG KÝ</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="widget-area">
+            <div class="container">
+                <div class="widget-row">
+                    <div class="widget-row-col-1">
+                        <h3 class="widget-title">Về chúng tôi</h3>
+                        <div class="widget-row-col-content">
+                            <p>F&K FOOD là thương hiệu uy tín, cam kết chất lượng sản phẩm lên hàng đầu.</p>
+                        </div>
+                        <div class="widget-social">
+                            <div class="widget-social-item"><a href=""><i class="fab fa-facebook-f"></i></a></div>
+                            <div class="widget-social-item"><a href=""><i class="fab fa-twitter"></i></a></div>
+                        </div>
+                    </div>
+                    <div class="widget-row-col">
+                        <h3 class="widget-title">Liên kết</h3>
+                        <ul class="widget-contact">
+                            <li class="widget-contact-item"><a href=""><i class="fa-solid fa-chevron-right"></i><span>Về chúng tôi</span></a></li>
+                            <li class="widget-contact-item"><a href=""><i class="fa-solid fa-chevron-right"></i><span>Thực đơn</span></a></li>
+                        </ul>
+                    </div>
+                    <div class="widget-row-col-1">
+                        <h3 class="widget-title">Liên hệ</h3>
+                        <div class="contact">
+                            <div class="contact-item">
+                                <div class="contact-item-icon"><i class="fa-solid fa-location-dot"></i></div>
+                                <div class="contact-content"><span>TP. Hồ Chí Minh</span></div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-item-icon"><i class="fa-solid fa-phone"></i></div>
+                                <div class="contact-content contact-item-phone"><span>0123 456 789</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="copyright-wrap">
+        <div class="container">
+            <div class="copyright-content">
+                <p>Copyright 2025 F&K FOOD. All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+    <div class="back-to-top">
+        <a href="#"><i class="fa-regular fa-arrow-up"></i></a>
+    </div>
+
+    <div id="toast"></div>
+    <script src="./js/config.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/checkout.js"></script>
+    <script src="./js/toast-message.js"></script>
+    <script>
+        const categories = ["Món chay", "Món mặn", "Món lẩu", "Món ăn vặt", "Món tráng miệng", "Nước uống"];
+        const state = {
+            allProducts: [],
+            filteredProducts: [],
+            page: 1,
+            limit: 12
+        };
+
+        function detailProductPHP(product) {
+            showModalDetail(product);
+        }
+
+        function openCart() {}
+        function closeCart() {}
+        function closeSearchAdvanced() {
+            document.querySelector(".advanced-search").classList.remove("open");
+        }
+
+        function buildMenu() {
+            const menuList = document.getElementById("menu-list");
+            categories.forEach((cat) => {
+                const item = document.createElement("li");
+                item.className = "menu-list-item";
+                item.innerHTML = `<a href="javascript:;" class="menu-link" data-category="${cat}">${cat}</a>`;
+                menuList.appendChild(item);
+            });
+            menuList.addEventListener("click", (event) => {
+                const link = event.target.closest("[data-category]");
+                if (!link) return;
+                document.getElementById("advanced-search-category-select").value = link.dataset.category;
+                applyFilters(1);
+            });
+        }
+
+        function readFilters() {
+            return {
+                search: document.getElementById("search-input").value.trim().toLowerCase(),
+                category: document.getElementById("advanced-search-category-select").value,
+                min: Number(document.getElementById("min-price").value || 0),
+                max: Number(document.getElementById("max-price").value || 0)
+            };
+        }
+
+        function applyFilters(nextPage = 1) {
+            const filters = readFilters();
+            state.page = nextPage;
+            state.filteredProducts = state.allProducts.filter((product) => {
+                const matchSearch = !filters.search || product.title.toLowerCase().includes(filters.search);
+                const matchCategory = filters.category === "Tất cả" || product.category === filters.category;
+                const matchMin = !filters.min || Number(product.price) >= filters.min;
+                const matchMax = !filters.max || Number(product.price) <= filters.max;
+                return matchSearch && matchCategory && matchMin && matchMax;
+            });
+            renderProducts();
+            renderPagination();
+        }
+
+        function renderProducts() {
+            const container = document.getElementById("home-products");
+            const start = (state.page - 1) * state.limit;
+            const items = state.filteredProducts.slice(start, start + state.limit);
+
+            if (!items.length) {
+                container.innerHTML = '<div class="no-result"><div class="no-result-i"><i class="fa-light fa-face-sad-cry"></i></div><div class="no-result-h">Không tìm thấy món nào!</div></div>';
+                return;
+            }
+
+            container.innerHTML = items.map((product) => `
+                <div class="col-product">
+                    <article class="card-product">
+                        <div class="card-header">
+                            <a href="javascript:;" class="card-image-link" data-detail="${product.id}">
+                                <img class="card-image" src="${product.img}" alt="${product.title}" onerror="this.src='./assets/img/blank-image.png'">
+                            </a>
+                        </div>
+                        <div class="food-info">
+                            <div class="card-content">
+                                <div class="card-title">
+                                    <a href="javascript:;" class="card-title-link" data-detail="${product.id}">${product.title}</a>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="product-price">
+                                    <span class="current-price">${vnd(product.price)}</span>
+                                </div>
+                                <div class="product-buy">
+                                    <button class="card-button order-item" data-detail="${product.id}"><i class="fa-regular fa-cart-shopping-fast"></i> Đặt món</button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            `).join("");
+        }
+
+        function renderPagination() {
+            const totalPages = Math.max(1, Math.ceil(state.filteredProducts.length / state.limit));
+            const pageList = document.getElementById("page-nav-list");
+            let html = "";
+
+            if (state.page > 1) {
+                html += `<li class="page-nav-item"><a href="javascript:;" data-page="${state.page - 1}"><i class="fa-solid fa-chevron-left"></i></a></li>`;
+            }
+
+            for (let i = 1; i <= totalPages; i += 1) {
+                html += `<li class="page-nav-item ${i === state.page ? "active" : ""}"><a href="javascript:;" data-page="${i}">${i}</a></li>`;
+            }
+
+            if (state.page < totalPages) {
+                html += `<li class="page-nav-item"><a href="javascript:;" data-page="${state.page + 1}"><i class="fa-solid fa-chevron-right"></i></a></li>`;
+            }
+
+            pageList.innerHTML = html;
+        }
+
+        async function loadProducts() {
+            try {
+                const response = await fetch(apiUrl("/products"));
+                state.allProducts = await response.json();
+                state.filteredProducts = [...state.allProducts];
+                applyFilters(1);
+            } catch (error) {
+                document.getElementById("home-products").innerHTML = '<div class="no-result"><div class="no-result-h">Không tải được dữ liệu sản phẩm.</div></div>';
+            }
+        }
+
+        document.addEventListener("click", (event) => {
+            const detailTarget = event.target.closest("[data-detail]");
+            if (detailTarget) {
+                const product = state.allProducts.find((item) => item.id === Number(detailTarget.dataset.detail));
+                if (product) detailProductPHP(product);
+            }
+
+            const pageTarget = event.target.closest("[data-page]");
+            if (pageTarget) {
+                applyFilters(Number(pageTarget.dataset.page));
+            }
+        });
+
+        document.getElementById("search-form").addEventListener("submit", (event) => {
+            event.preventDefault();
+            applyFilters(1);
+        });
+
+        document.getElementById("advanced-search-form").addEventListener("submit", (event) => {
+            event.preventDefault();
+            applyFilters(1);
+            closeSearchAdvanced();
+        });
+
+        document.getElementById("open-advanced-search").addEventListener("click", () => {
+            document.querySelector(".advanced-search").classList.add("open");
+        });
+
+        document.getElementById("close-advanced-search").addEventListener("click", closeSearchAdvanced);
+        document.getElementById("reset-search").addEventListener("click", () => {
+            document.getElementById("search-input").value = "";
+            document.getElementById("advanced-search-category-select").value = "Tất cả";
+            document.getElementById("min-price").value = "";
+            document.getElementById("max-price").value = "";
+            applyFilters(1);
+            closeSearchAdvanced();
+        });
+
+        buildMenu();
+        loadProducts();
+    </script>
+</body>
+</html>
