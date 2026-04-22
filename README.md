@@ -36,11 +36,12 @@ Neu deploy tren Railway, chi can gan service Laravel voi service MySQL va cap bi
 
 ## Deploy backend len Render
 
-Repo da co san `Dockerfile` o root de Render build backend Laravel.
+Repo da co san `Dockerfile` o root va trong `backend/` de Render build backend Laravel.
 
 - Service type: `Web Service`
 - Branch: `main`
 - Runtime: `Docker`
+- Neu `Root Directory = backend` thi van dung duoc vi da co `backend/Dockerfile`
 
 Bien moi truong can co tren Render:
 
