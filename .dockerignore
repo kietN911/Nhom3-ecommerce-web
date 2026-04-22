@@ -1,0 +1,12 @@
+.git
+.gitignore
+fkfood
+frontend
+backend/node_modules
+backend/vendor
+backend/storage/logs
+backend/storage/framework/cache/data
+backend/storage/framework/sessions
+backend/storage/framework/views
+backend/.env
+backend/.env.*

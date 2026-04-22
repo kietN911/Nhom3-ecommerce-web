@@ -33,3 +33,24 @@ Laravel backend da duoc chinh de nhan bien moi truong Railway:
 - `MYSQLPASSWORD`
 
 Neu deploy tren Railway, chi can gan service Laravel voi service MySQL va cap bien moi truong.
+
+## Deploy backend len Render
+
+Repo da co san `Dockerfile` o root de Render build backend Laravel.
+
+- Service type: `Web Service`
+- Branch: `main`
+- Runtime: `Docker`
+
+Bien moi truong can co tren Render:
+
+- `APP_KEY`
+- `APP_ENV=production`
+- `APP_DEBUG=false`
+- `APP_URL=https://<ten-service>.onrender.com`
+- `DB_CONNECTION=mysql`
+- `MYSQLHOST=<public-host-tu-railway>`
+- `MYSQLPORT=<public-port-tu-railway>`
+- `MYSQLDATABASE=<db-name>`
+- `MYSQLUSER=<db-user>`
+- `MYSQLPASSWORD=<db-password>`
