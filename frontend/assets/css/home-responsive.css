@@ -1,4 +1,40 @@
 @media (max-width: 991.98px) {
+    .hero-banner {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        padding: 30px;
+    }
+
+    .hero-heading {
+        font-size: 42px;
+    }
+
+    .hero-subtitle {
+        max-width: 100%;
+    }
+
+    .hero-features {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hero-banner-visual {
+        min-height: auto;
+    }
+
+    .hero-visual-card {
+        max-width: 100%;
+    }
+
+    .hero-visual-top {
+        top: 10px;
+        left: 10px;
+    }
+
+    .hero-visual-bottom {
+        right: 10px;
+        bottom: 10px;
+    }
+
     .col-product {
         width: 33.33%;
     }
@@ -86,6 +122,76 @@
 
     .home-slider {
         padding: 0 10px;
+    }
+
+    .hero-banner {
+        padding: 22px 18px;
+        border-radius: 22px;
+        gap: 18px;
+    }
+
+    .hero-heading {
+        font-size: 34px;
+        margin-bottom: 10px;
+    }
+
+    .hero-badge {
+        font-size: 12px;
+        padding: 8px 12px;
+        margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .hero-actions {
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .hero-button {
+        width: 100%;
+        min-width: 0;
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+
+    .hero-features {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 18px;
+    }
+
+    .hero-feature-card {
+        border-radius: 16px;
+        padding: 14px;
+    }
+
+    .hero-feature-card strong {
+        font-size: 16px;
+    }
+
+    .hero-banner-visual {
+        min-height: auto;
+    }
+
+    .hero-visual-main {
+        transform: none;
+        border-radius: 20px;
+    }
+
+    .hero-visual-floating {
+        position: static;
+        margin-top: 12px;
+        border-radius: 16px;
+        padding: 14px;
+    }
+
+    .hero-visual-bottom {
+        flex-direction: column;
+        gap: 10px;
     }
 
 
