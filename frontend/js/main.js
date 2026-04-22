@@ -160,14 +160,94 @@ function addToCartJS(id, title, img, price) {
 
 function updateAmount() {
     let currentuser = localStorage.getItem('currentuser') ? JSON.parse(localStorage.getItem('currentuser')) : null;
-    if(currentuser) {
-        let total = 0;
-        if(currentuser.cart) {
-            currentuser.cart.forEach(item => total += item.soluong);
-        }
-        let cartIcon = document.querySelector('.count-product-cart');
-        if(cartIcon) cartIcon.innerText = total;
+    let total = 0;
+
+    if(currentuser && currentuser.cart) {
+        currentuser.cart.forEach(item => total += item.soluong);
     }
+
+    let cartIcon = document.querySelector('.count-product-cart');
+    if(cartIcon) {
+        cartIcon.innerText = total;
+    }
+}
+
+function getCurrentUserData() {
+    const raw = localStorage.getItem('currentuser');
+    return raw ? JSON.parse(raw) : null;
+}
+
+function saveCurrentUserData(user) {
+    localStorage.setItem('currentuser', JSON.stringify(user));
+}
+
+function renderCart() {
+    const currentuser = getCurrentUserData();
+    const cart = currentuser?.cart || [];
+    const cartList = document.querySelector('.cart-list');
+    const emptyState = document.querySelector('.gio-hang-trong');
+    const totalPrice = document.querySelector('.cart-total-price .text-price');
+    const checkoutButton = document.querySelector('.thanh-toan');
+
+    if (!cartList || !emptyState || !totalPrice || !checkoutButton) {
+        return;
+    }
+
+    if (!cart.length) {
+        cartList.innerHTML = '';
+        emptyState.style.display = 'flex';
+        totalPrice.innerText = vnd(0);
+        checkoutButton.classList.add('disabled');
+        return;
+    }
+
+    emptyState.style.display = 'none';
+
+    const total = cart.reduce((sum, item) => sum + (Number(item.price) * Number(item.soluong)), 0);
+    totalPrice.innerText = vnd(total);
+    checkoutButton.classList.remove('disabled');
+
+    cartList.innerHTML = cart.map((item) => `
+        <li class="cart-item">
+            <div class="cart-item-info">
+                <div class="cart-item-title">
+                    <strong>${item.title}</strong>
+                    ${item.note ? `<div class="product-note"><i class="fa-light fa-note-sticky"></i>${item.note}</div>` : ''}
+                </div>
+                <div class="cart-item-price">${vnd(item.price * item.soluong)}</div>
+            </div>
+            <div class="cart-item-control">
+                <span>Số lượng: ${item.soluong}</span>
+                <button class="cart-item-delete" type="button" data-remove-cart-id="${item.id}">Xóa</button>
+            </div>
+        </li>
+    `).join('');
+}
+
+function openCart() {
+    const modalCart = document.querySelector('.modal-cart');
+    if (!modalCart) return;
+    renderCart();
+    modalCart.classList.add('open');
+    body.style.overflow = 'hidden';
+}
+
+function closeCart() {
+    const modalCart = document.querySelector('.modal-cart');
+    if (!modalCart) return;
+    modalCart.classList.remove('open');
+    body.style.overflow = 'auto';
+}
+
+function removeCartItem(productId) {
+    const currentuser = getCurrentUserData();
+    if (!currentuser || !currentuser.cart) return;
+
+    currentuser.cart = currentuser.cart.filter((item) => Number(item.id) !== Number(productId));
+    saveCurrentUserData(currentuser);
+    updateAmount();
+    renderCart();
+    showToast('Thành công', 'Đã xóa sản phẩm khỏi giỏ hàng.', 'success');
 }
 
 // Mua ngay (Đặt hàng luôn không cần thêm vào giỏ)
@@ -371,5 +451,25 @@ function showToast(title, message, type = 'success') {
 window.onload = function() {
     updateAmount();
     checkLoginStatus();
+    renderCart();
     // updateCartTotal(); // Hàm này nằm trong checkout.js hoặc phần xử lý giỏ hàng chi tiết nếu có
 }
+
+document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('modal-cart')) {
+        closeCart();
+    }
+
+    const removeButton = event.target.closest('[data-remove-cart-id]');
+    if (removeButton) {
+        removeCartItem(removeButton.dataset.removeCartId);
+    }
+
+    if (event.target.closest('.them-mon')) {
+        closeCart();
+    }
+
+    if (event.target.closest('.thanh-toan') && !event.target.closest('.thanh-toan').classList.contains('disabled')) {
+        showToast('Thông báo', 'Chức năng thanh toán đang được hoàn thiện.', 'info');
+    }
+});
