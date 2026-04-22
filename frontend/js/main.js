@@ -238,23 +238,32 @@ if(btnLoginSubmit) {
             try {
                 let res = await fetch(apiUrl('/login'), {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
                     body: JSON.stringify({ phone: phone, password: pass })
                 });
-                let data = await res.json();
+                let raw = await res.text();
+                let data;
+                try {
+                    data = JSON.parse(raw);
+                } catch (parseError) {
+                    throw new Error(`Phản hồi máy chủ không hợp lệ: ${raw.slice(0, 120)}`);
+                }
                 
-                if (data.status === 'success') {
+                if (res.ok && data.status === 'success') {
                     // Lưu user vào localStorage
                     localStorage.setItem('currentuser', JSON.stringify(data.user));
                     showToast('Thành công', 'Đăng nhập thành công!', 'success');
                     closeModal();
                     checkLoginStatus(); // Cập nhật lại header
                 } else {
-                    showToast('Lỗi', data.message, 'error');
+                    showToast('Lỗi', data.message || 'Đăng nhập thất bại', 'error');
                 }
             } catch (err) {
                 console.error(err);
-                showToast('Lỗi', 'Không thể kết nối Server', 'error');
+                showToast('Lỗi', err.message || 'Không thể kết nối Server', 'error');
             }
         } else {
             showToast('Lỗi', 'Vui lòng nhập đầy đủ thông tin', 'warning');
@@ -318,13 +327,22 @@ if (btnSignupSubmit) {
     try {
       let res = await fetch(apiUrl('/register'), {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({ fullname: fullname, phone: phone, password: pass })
       });
 
-      let data = await res.json();
+      let raw = await res.text();
+      let data;
+      try {
+        data = JSON.parse(raw);
+      } catch (parseError) {
+        throw new Error(`Phản hồi máy chủ không hợp lệ: ${raw.slice(0, 120)}`);
+      }
 
-      if (data.status === 'success') {
+      if (res.ok && data.status === 'success') {
         localStorage.setItem('currentuser', JSON.stringify(data.user));
         showToast('Thành công', data.message || 'Đăng ký thành công!', 'success');
         closeModal();
