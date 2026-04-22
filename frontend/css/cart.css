@@ -1,0 +1,122 @@
+/* Thiết lập phông chữ chung */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Thiết lập lưới */
+.grid {
+    display: grid;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Style cho tiêu đề giỏ hàng */
+.cart-product h1 {
+    text-align: center;
+}
+
+/* Style cho bảng giỏ hàng */
+.cart-product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Style cho tiêu đề cột */
+.cart-product-heading-wrapper th {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Style cho mỗi hàng sản phẩm */
+.cart-product-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Style cho ảnh sản phẩm */
+.cart-product-item img {
+    max-width: 80px;
+    max-height: 80px;
+}
+
+/* Style cho nút giảm và tăng số lượng */
+.cart-product__icon-link {
+    text-decoration: none;
+    color: #333;
+    margin: 0 5px;
+}
+
+/* Style cho nút xóa sản phẩm */
+.remove-button {
+    color: #d9534f;
+    cursor: pointer;
+}
+
+/* Style cho tổng cộng và nút mua hàng */
+.cart-total {
+    text-align: right;
+}
+
+/* Style cho nút mua hàng */
+.btn-buy-cart {
+    padding: 10px 20px;
+    background-color: #5bc0de;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Style cho thông báo khi giỏ hàng trống */
+.cart-no-product {
+    text-align: center;
+    font-style: italic;
+    color: #999;
+}
+/* Style cho nút mua hàng */
+.btn-buy-cart {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #5bc0de;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect */
+.btn-buy-cart:hover {
+    background-color: #46b8da;
+}
+
+/* Active effect */
+.btn-buy-cart:active {
+    background-color: #31b0d5;
+}
+/* style cho hiện tổng sản phẩm ở giỏ hàng*/
+.cart-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+
+
